@@ -9,20 +9,39 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        primary: {
-          DEFAULT: '#1D4ED8', // 기본 primary 색상
-          light: '#3B82F6', // 밝은 색상
-          dark: '#1E3A8A', // 어두운 색상
+        blue: {
+          DEFAULT: '#0057FF', // blue-main color
+          200: '#1C20ED', // blue-200 color
         },
-        secondary: {
-          DEFAULT: '#D97706',
-          light: '#F59E0B',
-          dark: '#B45309',
+        purple: {
+          100: '#6A0DAD', // default purple color
+          200: '#8000FF', // purple-200 color
         },
-        // 다른 사용자 정의 색상
+        skyblue: {
+          100: '#00ADEF', // skyblue color
+        },
+        yellow: {
+          100: '#FFEB3B', // yellow color
+        },
+        error: {
+          100: '#FF5722', // error color
+        },
+        white: {
+          100: '#FFFFFF', // white color
+        },
+        black: {
+          100: '#000000', // black color
+        },
+        gray: {
+          400: '#4B5563', // gray-400 color
+          300: '#9CA3AF', // gray-300 color
+          200: '#E5E7EB', // gray-200 color
+          100: '#F3F4F6', // gray-100 color
+        },
       },
     },
   },
   plugins: [],
 };
+
 export default config;
