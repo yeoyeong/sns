@@ -1,5 +1,5 @@
-import Loginform from "../../../../_features/i/ui/login/login-form"
+import { Loginform } from '@/_features/i';
 
 export default function LoginPage() {
-  return <Loginform />
+  return <Loginform />;
 }

@@ -1,9 +1,29 @@
 {
-  "extends": ["next/core-web-vitals", "airbnb", "airbnb-typescript", "prettier"],
+  "extends": [
+    "next/core-web-vitals",
+    "airbnb",
+    "airbnb-typescript",
+    "prettier"
+  ],
   "parserOptions": {
     "project": "./tsconfig.json"
   },
   "rules": {
-    "react/react-in-jsx-scope": "off"
+    "react/react-in-jsx-scope": "off",
+
+    // 화살표 함수에서 블록문 사용
+    "arrow-body-style": "off",
+
+    // 파일에 하나의 내보내기만 있을 때 default 붙이는 규칙
+    "import/prefer-default-export": "off"
+
+    // 컴포넌트에 화살표 함수 사용
+    // "react/function-component-definition": [
+    //   "error",
+    //   {
+    //     "namedComponents": "arrow-function",
+    //     "unnamedComponents": "arrow-function"
+    //   }
+    // ]
   }
 }

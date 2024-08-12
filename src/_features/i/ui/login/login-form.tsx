@@ -1,14 +1,15 @@
-'use client'
-import { useGoogleLogin } from "../../model/hooks/useGoogleLogin"
+'use client';
 
-const Loginform = () => {
-  const { signInWithGoogle } = useGoogleLogin()
+import useGoogleLogin from '../../model/hooks/useGoogleLogin';
 
-  
-  return <div>
-  
-    <button onClick={signInWithGoogle}>Sign In with Google</button>
-</div>
+export default function Loginform() {
+  const { signInWithGoogle } = useGoogleLogin();
+
+  return (
+    <div>
+      <button type='submit' onClick={signInWithGoogle}>
+        Sign In with Google
+      </button>
+    </div>
+  );
 }
-
-export default Loginform
