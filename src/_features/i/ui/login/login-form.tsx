@@ -1,5 +1,7 @@
 'use client';
 
+import Image from 'next/image';
+import google_logo from '@/_shared/asset/logo/google_login_logo.svg';
 import useGoogleLogin from '../../model/hooks/useGoogleLogin';
 
 export default function Loginform() {
@@ -8,7 +10,7 @@ export default function Loginform() {
   return (
     <div>
       <button type='submit' onClick={signInWithGoogle}>
-        Sign In with Google
+        <Image src={google_logo} alt='google_logo' />
       </button>
     </div>
   );

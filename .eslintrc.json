@@ -15,7 +15,14 @@
     "arrow-body-style": "off",
 
     // 파일에 하나의 내보내기만 있을 때 default 붙이는 규칙
-    "import/prefer-default-export": "off"
+    "import/prefer-default-export": "off",
+
+    //React 컴포넌트에서 선택적인
+    // props(선택적 속성)에 대해 기본값(defaultProps)을 설정하도록 강제
+    "react/require-default-props": "off",
+
+    // 버튼 타입 필수 작성 비활성화
+    "react/button-has-type": "warn" // 또는 "off"로 설정하여 경고를 무시
 
     // 컴포넌트에 화살표 함수 사용
     // "react/function-component-definition": [
