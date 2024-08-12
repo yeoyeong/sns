@@ -1,4 +1,4 @@
-import Signupform from "@/app/(beforeLogin)/_components/signup/signup-form"
+import Signupform from "@/_features/i/ui/signup/signup-form"
 
 export default function SignupPage() {
   return <Signupform />
