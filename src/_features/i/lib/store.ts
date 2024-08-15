@@ -1,21 +1,22 @@
 import { create } from 'zustand';
-import { SignupStore } from './types/signup';
+import { SignupFormData, SignupStore } from './types/signup';
 
 const signupStore =
   create <
   SignupStore >
   ((set) => ({
     signupFormData: {
-      id: '',
+      userId: '',
       password: '',
-      confirmPassword: '',
       email: '',
-      profileImg: '',
+      profileImg: null,
       nickname: '',
       oneLiner: '',
-    },
-    setSignupFormData: (action) =>
-      set((state) => ({ signupFormData: action(state.signupFormData) })),
+    } as SignupFormData,
+    setSignupFormData: (data) =>
+      set((state) => ({
+        signupFormData: { ...state.signupFormData, ...data },
+      })),
   }));
 
 export default signupStore;
