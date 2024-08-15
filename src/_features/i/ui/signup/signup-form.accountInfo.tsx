@@ -1,7 +1,8 @@
-import signupStore from "@/_features/i/lib/store";
+
 import { AccountInfo } from "@/_features/i/lib/types/signup";
 import { useForm } from "react-hook-form";
 import InputField from "./signup-form.inputField";
+import { signupStore } from "../../lib";
 
 
 type Props = {

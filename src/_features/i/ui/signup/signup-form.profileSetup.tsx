@@ -2,9 +2,9 @@ import { useState } from "react";
 import Image from "next/image";
 import userIcon from "@/_shared/asset/icon/userIcon.png"
 import { useForm } from "react-hook-form";
-import signupStore from "../../lib/store";
 import { ProfileSetup, SignupFormData } from "../../lib/types/signup";
 import { useSignup, useUploadImgGetUrl } from "../../model";
+import { signupStore } from "../../lib";
 
 
 
