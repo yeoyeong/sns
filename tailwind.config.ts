@@ -2,15 +2,16 @@ import type { Config } from 'tailwindcss';
 
 const config: Config = {
   content: [
-    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/**/*.{js,ts,jsx,tsx,mdx}', // src 폴더 아래의 모든 파일을 포함
+    // './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
+    // './src/components/**/*.{js,ts,jsx,tsx,mdx}',
+    // './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     extend: {
       colors: {
         blue: {
-          DEFAULT: '#0057FF', // blue-main color
+          default: '#0057FF', // blue-main color
           200: '#1C20ED', // blue-200 color
         },
         purple: {

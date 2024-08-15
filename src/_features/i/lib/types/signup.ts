@@ -1,18 +1,24 @@
-type SignupFormData = {
-  id: string;
+
+type AccountInfo = {
+  userId: string;
   password: string;
-  confirmPassword: string;
+  confirmPassword?: string;
   email: string;
-  profileImg: string;
+};
+type ProfileSetup = {
+  profileImg: string | null | undefined;
   nickname: string;
   oneLiner: string;
 };
 
+type SignupFormData = AccountInfo & ProfileSetup;
+
 type SignupStore = {
     signupFormData: SignupFormData;
-    setSignupFormData: (action: (prev: SignupFormData) => SignupFormData) => void;
+    // setSignupFormData: (action: (prev: AccountInfo | ProfileSetup) => SignupFormData) => void;
+    setSignupFormData: (data: Partial<SignupFormData>) => void;
 };
 
-export type {SignupFormData, SignupStore};
+export type {AccountInfo, ProfileSetup, SignupFormData, SignupStore};
 
   
