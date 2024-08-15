@@ -10,16 +10,19 @@ const useUploadImgGetUrl = () => {
       .getPublicUrl(filePath);
 
     if (!data || !data.publicUrl) {
-      console.error('Error getting public URL.');
+      // TODO: 에러처리
       return null;
     }
     return data.publicUrl;
   };
 
-  const uploadImg = async (image: File, BUCKETNAME: string) => {
+  const uploadImg = async (
+    image: File,
+    BUCKETNAME: string
+  ): Promise<string | null> => {
     if (!image) {
       // TODO: 기본이미지 처리
-      return;
+      return null;
     }
     const fileExt = image.name.split('.').pop();
     const fileName = `${Math.random()}.${fileExt}`;
@@ -31,13 +34,15 @@ const useUploadImgGetUrl = () => {
 
     // 업로드 후 에러가 있는지 확인
     if (uploadError) {
-      console.error('Error uploading file:', uploadError.message);
-      return;
+      // TODO: 에러처리
+      // alert('Error uploading file:', uploadError.message);
+      return null;
     }
     const publicUrl = getProfileImgURL(BUCKETNAME, filePath);
     if (typeof publicUrl === 'string') return publicUrl;
     return null;
   };
+
   return { uploadImg };
 };
 

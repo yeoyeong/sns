@@ -29,7 +29,7 @@ export default function SignupProfileSetup({ setStep }: Props) {
     let profileImgUrl = null;
 
     if (profileImg) {
-      //사진 업로드 로직 수행
+      // 사진 업로드 로직 수행
       profileImgUrl = await uploadImg(profileImg,'profile_img')
     }
 

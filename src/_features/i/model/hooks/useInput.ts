@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback, useEffect } from 'react';
+import { useState, useRef, useCallback } from 'react';
 
 // 제네릭 타입 T는 초기값의 타입을 나타내며, 모든 키는 숫자 또는 문자열이어야 합니다.
 export default function useInput<T extends { [key: string]: number | string }>(initialValues: T) {
@@ -41,11 +41,6 @@ export default function useInput<T extends { [key: string]: number | string }>(i
     },
     []
   );
-
-  useEffect(()=>{
-    console.log(inputRefs.current)
-    console.log(values)
-  },[values, inputRefs])
 
   return {
     values,
