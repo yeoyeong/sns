@@ -1,4 +1,4 @@
-import supabase from '@/supabaseClient';
+import supabase from '@/_shared/util/supabase/client';
 
 const useUploadImgGetUrl = () => {
   const getProfileImgURL = (

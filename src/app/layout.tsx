@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import '@/_shared/styles/globals.css';
 import '@/_shared/styles/theme.css';
 import Provider from '@/_shared/util/ReactQueryProviders';
+import ZustandProvider from '@/_shared/util/ZustandProvider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -19,7 +20,9 @@ export default function RootLayout({
   return (
     <html lang='ko'>
       <body className={inter.className}>
-        <Provider>{children}</Provider>
+        <Provider>
+          <ZustandProvider>{children}</ZustandProvider>
+        </Provider>
       </body>
     </html>
   );

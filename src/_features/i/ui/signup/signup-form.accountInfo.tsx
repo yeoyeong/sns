@@ -25,6 +25,7 @@ export default function SignupAccountInfo({setStep}:Props) {
     setStep(prev=>prev+1)
   };
 
+  // TODO: 이메일, 아이디, 중복체크 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex h-full flex-col pt-12 justify-between">
       {/* eslint-disable react/jsx-props-no-spreading */}
