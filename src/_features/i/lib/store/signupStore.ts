@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { SignupFormData, SignupStore } from './types/signup';
+import { SignupFormData, SignupStore } from '../types/signup';
 
 const signupStore =
   create <

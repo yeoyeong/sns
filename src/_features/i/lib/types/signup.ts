@@ -19,6 +19,6 @@ type SignupStore = {
     setSignupFormData: (data: Partial<SignupFormData>) => void;
 };
 
-export type {AccountInfo, ProfileSetup, SignupFormData, SignupStore};
+export type { AccountInfo, ProfileSetup, SignupFormData, SignupStore };
 
   

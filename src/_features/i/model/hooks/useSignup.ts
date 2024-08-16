@@ -1,4 +1,5 @@
-import supabase from '@/supabaseClient';
+
+import supabase from '@/_shared/util/supabase/client';
 import { SignupFormData } from '../../lib/types/signup';
 
 const useSignup = () => {
