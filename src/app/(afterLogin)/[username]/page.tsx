@@ -15,7 +15,7 @@ export default async function Page({ params }: Props) {
   const user = await getUserData(username);
   const myData = await getMyData();
   
-  if (!user) {
+  if (!user || !myData) {
     notFound();
   }
   
@@ -27,7 +27,7 @@ export default async function Page({ params }: Props) {
   return (
       <div>
         <HeaderUser username={username} />
-        <UserInfo user={user} isMe={CheckUserType()}/>
+        <UserInfo user={user} isMe={CheckUserType()} myid={myData?.uid} />
       </div>
     )
 }
