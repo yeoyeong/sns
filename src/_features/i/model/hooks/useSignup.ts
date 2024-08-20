@@ -1,6 +1,8 @@
 
+// 지금 안씀
+
 import supabase from '@/_shared/util/supabase/client';
-import { SignupFormData } from '../../lib/types/signup';
+import { SignupFormData } from '../../lib/types/user';
 
 const useSignup = () => {
   const signUpUser = async (formData: SignupFormData) => {

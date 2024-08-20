@@ -2,8 +2,8 @@ import { useState } from "react";
 import Image from "next/image";
 import userIcon from "@/_shared/asset/icon/userIcon.png"
 import { useForm } from "react-hook-form";
-import { ProfileSetup, SignupFormData } from "../../lib/types/signup";
-import { useSignup, useUploadImgGetUrl } from "../../model";
+import { ProfileSetup, SignupFormData } from "../../lib/types/user";
+import { useAuthActions, useUploadImgGetUrl } from "../../model";
 import { signupStore } from "../../lib";
 
 
@@ -14,7 +14,7 @@ type Props = {
 
 export default function SignupProfileSetup({ setStep }: Props) {
   const { uploadImg } = useUploadImgGetUrl()
-  const { signUpUser } = useSignup()
+  const { signupUser } = useAuthActions()
   const [profileImg, setProfileImg] = useState<null|File>(null);
   const [imagePath, setImagePath] = useState('');
   const { signupFormData, setSignupFormData }= signupStore()
@@ -35,7 +35,7 @@ export default function SignupProfileSetup({ setStep }: Props) {
 
     formData = {...signupFormData, ...data, profileImg:profileImgUrl}
 
-    if(!await signUpUser(formData)) return
+    if(!await signupUser(formData)) return
     
       setSignupFormData(formData)
       setStep(prev=>prev+1)
