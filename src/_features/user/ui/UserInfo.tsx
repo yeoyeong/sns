@@ -1,15 +1,22 @@
+'use client';
+
 import { UserData } from '@/_features/i/lib/types/user';
 import Image from 'next/image';
 import setting_icon from '@/_shared/asset/icon/setting_icon.png';
 import user_icon from '@/_shared/asset/icon/header-user_icon.png';
+import useGetUserStats from '../model/query/useGetUserStats';
+import usePostUserFollow from '../model/query/usePostUserFollow';
 
 type Props = {
   user: UserData;
   isMe: boolean;
+  myid: string;
 };
 
-export default function UserInfo({ user, isMe }: Props) {
-  console.log(user);
+export default function UserInfo({ user, isMe, myid }: Props) {
+  const { data, isLoading } = useGetUserStats({ uid: user.uid });
+  const { followingHandler } = usePostUserFollow();
+  console.log(data);
   return (
     <div className='flex justify-center gap-10 pt-16'>
       <div className='flex flex-col items-center gap-4'>
@@ -51,6 +58,9 @@ export default function UserInfo({ user, isMe }: Props) {
           <div>
             {!isMe ? (
               <button
+                onClick={() =>
+                  followingHandler({ followerId: myid, followingId: user.uid })
+                }
                 className='rounded-lg bg-gray-200 px-2 py-1 font-bold shadow-md'
                 type='button'>
                 팔로우
@@ -65,26 +75,25 @@ export default function UserInfo({ user, isMe }: Props) {
         <ul className='flex gap-5'>
           <li>
             <p>
-              <span className='mr-1 font-bold'>게시물</span>0
+              <span className='mr-1 font-bold'>게시물</span>
+              {isLoading ? 0 : data.postCount}
             </p>
           </li>
           <li>
             <p>
-              <span className='mr-1 font-bold'>팔로우</span>0
+              <span className='mr-1 font-bold'>팔로우</span>
+              {isLoading ? 0 : data.followerCount}
             </p>
           </li>
           <li>
             <p>
-              <span className='mr-1 font-bold'>팔로워</span>0
+              <span className='mr-1 font-bold'>팔로워</span>
+              {isLoading ? 0 : data.followingCount}
             </p>
           </li>
         </ul>
         <p className='text-gray-300'>
-          {user.oneLiner ? (
-            <>{user.oneLiner}</>
-          ) : (
-            <>안녕하세요 {user.nickname}입니다.</>
-          )}
+          {user.oneLiner ? user.oneLiner : `안녕하세요 ${user.nickname}입니다.`}
         </p>
       </div>
     </div>
