@@ -1,7 +1,8 @@
-import { AccountInfo } from "@/_features/i/lib/types/signup";
 import { useForm } from "react-hook-form";
 import InputField from "../signup/signup-form.inputField";
 import { useAuthActions } from "../../model";
+import { AccountInfo } from "../../lib/types/user";
+
 
 
 

@@ -5,10 +5,10 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
 type Props = {
-  displayName: string;
+  username: string;
 };
 
-export default function HeaderUser({ displayName }: Props) {
+export default function HeaderUser({ username }: Props) {
   const router = useRouter();
 
   const goBack = () => {
@@ -22,7 +22,7 @@ export default function HeaderUser({ displayName }: Props) {
         onClick={goBack}>
         <Image src={back_arrow} alt='뒤로가기 아이콘' width={16} />
       </button>
-      <h3>{displayName}</h3>
+      <h3>{username}</h3>
     </div>
   );
 }

@@ -1,24 +1,22 @@
 'use client';
 
-import { useAuthStore } from '@/_shared/util/store';
+import { UserData } from '@/_features/i/lib/types/user';
 import { usePathname } from 'next/navigation';
 import HeaderMain from './Header.mainPage';
-import HeaderUser from './Header.userPage';
 
-export default function Header() {
-  const { user } = useAuthStore();
+type Props = {
+  user: UserData | null;
+};
+
+export default function Header({ user }: Props) {
   const pathname = usePathname().replace(/\//g, ''); // "/"를 제거합니다.
-  const isUserPage =
-    user?.user_metadata?.displayName?.toLowerCase() === pathname.toLowerCase();
-  //
+
+  console.log();
+  if (!user || pathname !== '') return null;
 
   return (
     <header className='flex justify-center'>
-      {isUserPage && user ? (
-        <HeaderUser displayName={user.user_metadata?.displayName} />
-      ) : (
-        <HeaderMain displayName={user?.user_metadata?.displayName} />
-      )}
+      <HeaderMain user={user} />
     </header>
   );
 }

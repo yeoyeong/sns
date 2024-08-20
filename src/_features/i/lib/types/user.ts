@@ -1,4 +1,5 @@
 
+
 type AccountInfo = {
   userId: string;
   password: string;
@@ -19,6 +20,14 @@ type SignupStore = {
     setSignupFormData: (data: Partial<SignupFormData>) => void;
 };
 
-export type { AccountInfo, ProfileSetup, SignupFormData, SignupStore };
+type UserData = {
+  uid: string;
+  userId: string;
+  nickname: string;
+  profileImg: string;
+  oneLiner: string;
+};
+
+export type { AccountInfo, ProfileSetup, SignupFormData, SignupStore, UserData };
 
   
