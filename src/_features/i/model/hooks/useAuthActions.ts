@@ -1,7 +1,6 @@
-import Cookies from 'js-cookie';
-import supabase from '@/_shared/util/supabase/client';
 import { useRouter } from 'next/navigation';
 import { SignupFormData } from '../../lib/types/user';
+import { SignOutApi } from '../api/signOut-api';
 
 const useAuthActions = () => {
   const router = useRouter();
@@ -58,14 +57,12 @@ const useAuthActions = () => {
 
   // 로그아웃
   const signOut = async () => {
-    Cookies.remove('supabase-token');
-
-    const { error } = await supabase.auth.signOut();
-    if (error) {
-      // TODO: 에러처리 !
-      console.error('Logout error:', error.message);
-    } else {
+    try {
+      await SignOutApi();
       router.push('/');
+    } catch (error) {
+      console.error('Error logging out:', error);
+      // TODO: 에러처리
     }
   };
 
