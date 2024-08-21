@@ -59,14 +59,14 @@ const useAuthActions = () => {
   // 로그아웃
   const signOut = async () => {
     Cookies.remove('supabase-token');
+    Cookies.remove('supabase-refresh-token');
 
     const { error } = await supabase.auth.signOut();
     if (error) {
       // TODO: 에러처리 !
       console.error('Logout error:', error.message);
-    } else {
-      router.push('/');
     }
+    router.push('/');
   };
 
   return { signupUser, signOut, onSubmit };

@@ -1,11 +1,13 @@
 'use client';
 
+import { useState } from 'react';
 import { UserData } from '@/_features/i/lib/types/user';
 import Image from 'next/image';
 import setting_icon from '@/_shared/asset/icon/setting_icon.png';
 import user_icon from '@/_shared/asset/icon/header-user_icon.png';
 import useGetUserStats from '../model/query/useGetUserStats';
 import usePostUserFollow from '../model/query/usePostUserFollow';
+import { UserInfoSetting } from './UserInfo.setting';
 
 type Props = {
   user: UserData;
@@ -16,7 +18,8 @@ type Props = {
 export default function UserInfo({ user, isMe, myid }: Props) {
   const { data, isLoading } = useGetUserStats({ uid: user.uid });
   const { followingHandler } = usePostUserFollow();
-  console.log(data);
+  const [isSettingOn, setIsSettingOn] = useState(false);
+
   return (
     <div className='flex justify-center gap-10 pt-16'>
       <div className='flex flex-col items-center gap-4'>
@@ -66,9 +69,15 @@ export default function UserInfo({ user, isMe, myid }: Props) {
                 팔로우
               </button>
             ) : (
-              <button className='flex h-[32px] items-center' type='button'>
-                <Image src={setting_icon} width={16} alt='설정 아이콘' />
-              </button>
+              <div className='relative'>
+                <button
+                  className='flex h-[32px] items-center'
+                  type='button'
+                  onClick={() => setIsSettingOn((prev: boolean) => !prev)}>
+                  <Image src={setting_icon} width={16} alt='설정 아이콘' />
+                </button>
+                {isSettingOn && <UserInfoSetting />}
+              </div>
             )}
           </div>
         </div>
