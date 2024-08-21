@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import useModal from '@/_shared/lib/hooks/useModal';
 import { UserData } from '@/_features/i/lib/types/user';
 import Image from 'next/image';
 import setting_icon from '@/_shared/asset/icon/setting_icon.png';
@@ -18,8 +18,7 @@ type Props = {
 export default function UserInfo({ user, isMe, myid }: Props) {
   const { data, isLoading } = useGetUserStats({ uid: user.uid });
   const { followingHandler } = usePostUserFollow();
-  const [isSettingOn, setIsSettingOn] = useState(false);
-
+  const { modalState, setModalState, setModalClose } = useModal();
   return (
     <div className='flex justify-center gap-10 pt-16'>
       <div className='flex flex-col items-center gap-4'>
@@ -73,10 +72,12 @@ export default function UserInfo({ user, isMe, myid }: Props) {
                 <button
                   className='flex h-[32px] items-center'
                   type='button'
-                  onClick={() => setIsSettingOn((prev: boolean) => !prev)}>
+                  onClick={setModalState}>
                   <Image src={setting_icon} width={16} alt='설정 아이콘' />
                 </button>
-                {isSettingOn && <UserInfoSetting />}
+                {modalState && (
+                  <UserInfoSetting setModalClose={setModalClose} />
+                )}
               </div>
             )}
           </div>
