@@ -1,3 +1,9 @@
+import { PostList } from '@/_features/post';
+
 export default function Home() {
-  return <main>메인페이지</main>;
+  return (
+    <main className='flex justify-center'>
+      <PostList />
+    </main>
+  );
 }

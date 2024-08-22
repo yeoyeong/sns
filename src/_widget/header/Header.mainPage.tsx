@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import alarm_icon from '@/_shared/asset/icon/header-alarm_icon.png';
-import message_icon from '@/_shared/asset/icon/header-message_icon.png';
+import message_icon from '@/_shared/asset/icon/message_icon.png';
 import user_icon from '@/_shared/asset/icon/header-user_icon.png';
-import search_icon from '@/_shared/asset/icon/search_icon.svg';
+import SearchIcon from '@/_shared/asset/icon/search_icon.svg';
 import logo from '@/_shared/asset/logo/logo.png';
 import Image from 'next/image';
 import { useState } from 'react';
@@ -32,7 +32,7 @@ export default function HeaderMain({ user }: Props) {
           />
           {!isFocused && (
             <div className='absolute left-3 top-1/2 -translate-y-1/2 transform'>
-              <Image src={search_icon} alt='검색 아이콘' />
+              <SearchIcon />
             </div>
           )}
         </div>
