@@ -6,8 +6,8 @@ import { WritingFormData } from '../lib/types/write';
 
 export default function WriteForm() {
   const {
-    register,
-    formState: { errors },
+    // register,
+    // formState: { errors },
     handleSubmit,
   } = useForm<WritingFormData>();
 

@@ -1,5 +1,5 @@
 import { useAuthActions } from '@/_features/i/model';
-import { ModalLayout } from '@/_shared/ui/layout/modal-layout';
+import { ModalLayout } from '@/_shared/ui/layout/client-modal-layout';
 
 type Props = {
   setModalClose: () => void;
