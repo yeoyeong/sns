@@ -3,6 +3,7 @@
 import { useForm } from 'react-hook-form';
 import InputPhoto from './writeForm.photo';
 import { WritingFormData } from '../lib/types/write';
+import InputContent from './writeForm.content';
 
 export default function WriteForm() {
   const {
@@ -17,6 +18,7 @@ export default function WriteForm() {
   return (
     <form className='pt-5 flex w-full h-full max-w-[420px] flex-col justify-between px-4' onSubmit={handleSubmit(onSubmit)}>
       <div>
+        <InputContent />
         <InputPhoto />
       </div>
       <input className="mb-4 w-full cursor-pointer py-4 rounded-3xl flex bg-blue-default text-white-100" type='submit' value="완료"/>

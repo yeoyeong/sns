@@ -12,12 +12,14 @@ export async function POST(req: Request) {
       domain: hostname ? hostname.split(':')[0] : undefined,
       expires: new Date(0),
       httpOnly: true,
+      secure: true,
     });
     response.cookies.set('supabase-refresh-token', '', {
       path: '/',
       domain: hostname ? hostname.split(':')[0] : undefined,
       expires: new Date(0),
       httpOnly: true,
+      secure: true,
     });
 
     // Supabase에서 로그아웃 처리
