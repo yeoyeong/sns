@@ -11,8 +11,16 @@ type Props = {
 export default function Header({ user }: Props) {
   const pathname = usePathname().replace(/\//g, ''); // "/"를 제거합니다.
 
-  console.log();
-  if (!user || pathname !== '') return null;
+  if (!user) return null;
+
+  if (pathname === 'postwrite')
+    return (
+      <header className='flex justify-center'>
+        <HeaderMain user={user} />
+      </header>
+    );
+
+  if (pathname !== '') return null;
 
   return (
     <header className='flex justify-center'>

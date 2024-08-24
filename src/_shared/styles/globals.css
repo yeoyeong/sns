@@ -104,5 +104,8 @@ table {
     text-wrap: balance;
   }
 }
-
+.card-grid {
+  @apply grid;
+  grid-template-columns: 1fr 4fr 1fr 2fr;
+}
 
