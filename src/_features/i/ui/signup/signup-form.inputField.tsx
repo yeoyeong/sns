@@ -20,7 +20,6 @@ export default function InputField({
 }: Props) {
   return (
     <div className='mb-4'>
-      {/* eslint-disable react/jsx-props-no-spreading */}
       <input
         className={`rounded-3xl border bg-transparent py-3 pl-6 ${
           error

@@ -8,7 +8,7 @@ export default function Layout({
   return (
     <div>
       {children}
-      {modal}
+      {modal && modal}
     </div>
   );
 }

@@ -22,7 +22,9 @@
     "react/require-default-props": "off",
 
     // 버튼 타입 필수 작성 비활성화
-    "react/button-has-type": "warn" // 또는 "off"로 설정하여 경고를 무시
+    "react/button-has-type": "warn", // 또는 "off"로 설정하여 경고를 무시
+
+    "react/jsx-props-no-spreading": "off"
 
     // 컴포넌트에 화살표 함수 사용
     // "react/function-component-definition": [

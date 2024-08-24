@@ -5,7 +5,8 @@ export default function useModal() {
 
   return {
     modalState,
-    setModalState: () => setModalState((prev) => !prev),
+    // setModalOn: () => setModalState((prev) => !prev),
+    setModalOn: () => setModalState(true),
     setModalClose: () => setModalState(false),
   };
 }

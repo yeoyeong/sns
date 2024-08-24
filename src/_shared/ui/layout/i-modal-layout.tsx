@@ -1,7 +1,7 @@
 import note_img from '@/_shared/asset/bg/note.png';
 import logo from '@/_shared/asset/logo/logo.png';
 import Image from 'next/image';
-import BackButton from './i-modal-layout.Button';
+import BackButton from '../button/BackButton';
 
 export default function ImodalLayout({
   children,

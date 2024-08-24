@@ -55,7 +55,7 @@ export default function PostCard() {
       </div>
       <div className='w-[360px] mt-1'>
         {picture.map((url)=>(
-          <img src={url} alt={url} />
+          <img key={url} src={url} alt={url} />
         ))}
       </div>
       <div className="grid grid-cols-10 border-l mt-1 w-[360px] border-t border-solid border-blue-300">
