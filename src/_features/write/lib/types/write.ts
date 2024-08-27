@@ -1,7 +1,7 @@
 export type WritingFormData = {
   content: string;
   weather: string;
-  picture: [];
+  picture: string[];
 };
 
 export type ImageFile = { id: string; file: File; blob: string };

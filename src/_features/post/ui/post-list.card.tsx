@@ -15,17 +15,13 @@ import { v4 as uuidv4 } from 'uuid';
 import HeartIcon  from "@/_shared/asset/icon/heart_icon.svg"
 import message_icon from "@/_shared/asset/icon/message_icon.png"
 import Image from 'next/image';
+import { GetPostType } from '../lib/type/getPostType';
 
-const mock = {
-  id:1,
-  user_id:"123123",
-  content:"점심 시간에는 친한 친구들과 대화하지않고 조용히 밥을 먹고 일어나요.",
-  weather:"맑음",
-  picture:["https://i.pinimg.com/564x/94/6e/5d/946e5dc23e1e1e0cef85e97b2ea43721.jpg"],
-  createdAt:new Date()
+type Props = {
+  data:GetPostType
 }
-export default function PostCard() {
-  const {content, weather, picture, createdAt} = mock
+export default function PostCard({data}:Props) {
+  const {content, weather, picture, created_at:createdAt} = data
   const contentArray = content.split("")
   const adjustedLength = Math.ceil(contentArray.length / 10) * 10; // 배열 길이를 10의 배수로 올림
   // contentArray의 길이를 10의 배수로 맞추기 위해 빈 문자열을 추가합니다.

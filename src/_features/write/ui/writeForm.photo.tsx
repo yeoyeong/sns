@@ -1,7 +1,7 @@
 'use client';
 
 import Photo from '@/_shared/asset/icon/photo_icon.svg';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { v4 as  uuidv4} from 'uuid';
 import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd';
 import writeStore from '../lib/store/store';
@@ -10,13 +10,9 @@ import PhotoDraggableItem from './writeForm.photoDraggableItem';
 import { validateFiles } from '../lib/validate';
 
 export default function InputPhoto() {
-  const { picture,setPicture, deletePicture }= writeStore()
+  const { setPicture, deletePicture }= writeStore()
   const [images, setImages] = useState<ImageFile[]>([]);
   
-  useEffect(()=>{
-    console.log(picture)
-    console.log(images)
-  },[picture, images])
 
   const handleOnDragEnd = (result:DropResult) => {
     if (!result.destination) return;
