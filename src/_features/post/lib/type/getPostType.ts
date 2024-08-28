@@ -5,4 +5,6 @@ export type GetPostType = {
   weather: string;
   picture: string[];
   created_at: string;
+  commentsCount: number;
+  likesCount: number;
 };

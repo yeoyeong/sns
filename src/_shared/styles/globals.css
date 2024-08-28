@@ -112,3 +112,8 @@ table {
   background-color: rgba(255, 255, 255, 0.5);
 }
 
+
+.swiper-button-prev:after,
+.swiper-button-next:after {
+  font-size: 16px; /* 화살표 아이콘 크기 줄이기 */
+}

@@ -1,4 +1,4 @@
-export const getPostApi = async ({ pageParam = 1, limit = 5 }) => {
+export const getCommentsApi = async ({ pageParam = 1, limit = 5 }) => {
   try {
     const response = await fetch(
       `/api/post/get?page=${pageParam}&limit=${limit}`,
@@ -18,4 +18,4 @@ export const getPostApi = async ({ pageParam = 1, limit = 5 }) => {
     return error;
   }
 };
-  
+    

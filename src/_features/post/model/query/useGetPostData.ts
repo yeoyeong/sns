@@ -12,7 +12,7 @@ const useGetPostData = (limit = 2) => {
     fetchNextPage,
     hasNextPage,
   } = useInfiniteQuery({
-    queryKey: ['userStats'],
+    queryKey: ['posts'],
     queryFn: ({ pageParam = 1 }) => getPostApi({ pageParam, limit }),
     getNextPageParam: (lastPage, allPages) => {
       if (!lastPage.hasMore) return undefined;

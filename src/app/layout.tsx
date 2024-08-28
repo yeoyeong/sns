@@ -1,5 +1,8 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 import '@/_shared/styles/globals.css';
 import '@/_shared/styles/theme.css';
 import Provider from '@/_shared/util/ReactQueryProviders';

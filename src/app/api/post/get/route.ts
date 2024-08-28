@@ -31,7 +31,7 @@ export async function GET(request: Request) {
     const offset = (page - 1) * limit; // offset = 시작 위치
 
     // 데이터 조회 (페이지네이션 적용)
-    const { data, error: fetchError } = await supabase
+    const { data: posts, error: fetchError } = await supabase
       .from('posts')
       .select('*')
       .range(offset, offset + limit - 1);
@@ -39,6 +39,45 @@ export async function GET(request: Request) {
     if (fetchError) {
       return NextResponse.json({ error: fetchError.message }, { status: 500 });
     }
+
+    // 각 포스트에 대해 댓글 및 좋아요 수를 가져오기
+    const postsWithCounts = await Promise.all(
+      posts.map(async (post) => {
+        const { id: postId } = post;
+
+        // 댓글 수 가져오기
+        const { count: commentsCount, error: commentsError } = await supabase
+          .from('comments')
+          .select('id', { count: 'exact' })
+          .eq('post_id', postId);
+
+        if (commentsError) {
+          return NextResponse.json(
+            { error: commentsError.message },
+            { status: 500 }
+          );
+        }
+
+        // 좋아요 수 가져오기
+        const { count: likesCount, error: likesError } = await supabase
+          .from('likes')
+          .select('id', { count: 'exact' })
+          .eq('post_id', postId);
+
+        if (likesError) {
+          return NextResponse.json(
+            { error: likesError.message },
+            { status: 500 }
+          );
+        }
+
+        return {
+          ...post,
+          commentsCount: commentsCount ?? 0, // 댓글 수
+          likesCount: likesCount ?? 0, // 좋아요 수
+        };
+      })
+    );
 
     // 총 데이터 수를 가져와서 클라이언트에 전달 (마지막 페이지인지 판단하기 위해)
     const { count } = await supabase
@@ -50,7 +89,7 @@ export async function GET(request: Request) {
 
     return NextResponse.json(
       {
-        data,
+        data: postsWithCounts,
         page,
         limit,
         hasMore, // 추가 데이터가 있는지 여부
