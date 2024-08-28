@@ -1,13 +1,13 @@
 'use client';
 
-import useModal from '@/_shared/lib/hooks/useModal';
 import { UserData } from '@/_features/i/lib/types/user';
 import Image from 'next/image';
 import setting_icon from '@/_shared/asset/icon/setting_icon.png';
 import user_icon from '@/_shared/asset/icon/header-user_icon.png';
+import useOutsideClick from '@/_shared/lib/hooks/useOutsideClick';
 import useGetUserStats from '../model/query/useGetUserStats';
 import usePostUserFollow from '../model/query/usePostUserFollow';
-import { UserInfoSetting } from './UserInfo.setting';
+import UserInfoSetting from './UserInfo.setting';
 
 type Props = {
   user: UserData;
@@ -18,7 +18,7 @@ type Props = {
 export default function UserInfo({ user, isMe, myid }: Props) {
   const { data, isLoading } = useGetUserStats({ uid: user.uid });
   const { followingHandler } = usePostUserFollow();
-  const { modalState, setModalOn, setModalClose } = useModal();
+  const { isOpen, setIsOpen, ref } = useOutsideClick();
   return (
     <div className='flex justify-center gap-10 pt-16'>
       <div className='flex flex-col items-center gap-4'>
@@ -68,16 +68,14 @@ export default function UserInfo({ user, isMe, myid }: Props) {
                 팔로우
               </button>
             ) : (
-              <div className='relative'>
+              <div className='relative' ref={ref}>
                 <button
                   className='flex h-[32px] items-center'
                   type='button'
-                  onClick={setModalOn}>
+                  onClick={() => setIsOpen(true)}>
                   <Image src={setting_icon} width={16} alt='설정 아이콘' />
                 </button>
-                {modalState && (
-                  <UserInfoSetting setModalClose={setModalClose} />
-                )}
+                {isOpen && <UserInfoSetting />}
               </div>
             )}
           </div>

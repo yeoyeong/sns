@@ -1,7 +1,8 @@
 import { CommentPayload } from '@/_features/comments/lib/types/commentsType';
 import useCreateComments from '@/_features/comments/model/query/useCreateComments';
 import { useInput } from '@/_features/i/model';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
+import PostListCommentsList from './post-list.commentsList';
 
 type Props = {
   post_id: number;
@@ -12,18 +13,16 @@ export default function PostListComments({
   post_id,
   commentsCount = 0,
 }: Props) {
-  const [isTyping, setIsTyping] = useState(false);
   const ref = useRef < HTMLInputElement > ({} as HTMLInputElement);
+  const [isTyping, setIsTyping] = useState(false);
+  const [isShowComments, setIsShowComments] = useState(false);
   const { createPostHandler } = useCreateComments();
   const { values, setValues, handleChange } = useInput({ comment: '' });
-  const isInput = async () => {
+
+  const isInputHandler = async () => {
     await setIsTyping(true);
     if (ref.current !== null) ref.current.focus(); // input에 focus
   };
-
-  useEffect(() => {
-    console.log(values);
-  }, [values]);
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key !== 'Enter' || values.comment.trim() === '') return;
@@ -42,9 +41,26 @@ export default function PostListComments({
 
   return (
     <div className='mt-2 flex flex-col items-start gap-1'>
-      <button type='button'>댓글 {commentsCount}개 모두 보기</button>
+      {!isShowComments ? (
+        <button
+          type='button'
+          className='text-gray-300'
+          onClick={() => setIsShowComments(true)}>
+          댓글 {commentsCount}개 모두 보기
+        </button>
+      ) : (
+        <>
+          <button
+            type='button'
+            className='text-gray-300'
+            onClick={() => setIsShowComments(false)}>
+            댓글 숨기기
+          </button>
+          <PostListCommentsList post_id={post_id} />
+        </>
+      )}
       {!isTyping ? (
-        <button type='button' onClick={isInput}>
+        <button type='button' onClick={isInputHandler}>
           댓글 달기 ...
         </button>
       ) : (

@@ -3,13 +3,11 @@
 import { UserData } from '@/_features/i/lib/types/user';
 import { usePathname } from 'next/navigation';
 import HeaderMain from './Header.mainPage';
+import { useUserStore } from '@/_shared/util/userStore';
 
-type Props = {
-  user: UserData | null;
-};
-
-export default function Header({ user }: Props) {
+export default function Header() {
   const pathname = usePathname().replace(/\//g, ''); // "/"를 제거합니다.
+  const { user } = useUserStore();
 
   if (!user) return null;
 

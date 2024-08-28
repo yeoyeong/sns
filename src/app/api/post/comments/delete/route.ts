@@ -2,7 +2,7 @@ import supabase from '@/_shared/util/supabase/client';
 import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 
-export async function POST(request: Request) {
+export async function DELETE(request: Request) {
   try {
     const cookieStore = cookies();
     const token = cookieStore.get('supabase-token')?.value;
@@ -26,6 +26,7 @@ export async function POST(request: Request) {
         { status: 401 }
       );
     }
+
     // 사용자 인증 성공 후 데이터 가져오기 (예: 프로필 데이터)
     const { data: userData, error: userDataError } = await supabase
       .from('users')
@@ -39,33 +40,30 @@ export async function POST(request: Request) {
       );
     }
 
-    const { post_id, content, parent_id } = await request.json();
+    // DELETE 요청에서 댓글 ID 추출
+    const { comment_id } = await request.json();
 
-    // 필수 데이터 체크
-    if (!post_id || !content) {
+    if (!comment_id) {
       return NextResponse.json(
-        { error: 'post_id and content required' },
+        { error: 'comment_id is required' },
         { status: 400 }
       );
     }
 
-    // 댓글 또는 대댓글 삽입
-    const { data, error } = await supabase.from('comments').insert([
-      {
-        post_id,
-        content,
-        parent_id,
-        nickname: userData[0].nickname,
-        user_id: userData[0].uid,
-        userId: userData[0].userId,
-      },
-    ]);
+    // 댓글 삭제 작업 수행
+    const { error } = await supabase
+      .from('comments')
+      .delete()
+      .eq('id', comment_id)
+      .eq('user_id', userData[0].uid);
 
     if (error) {
       return NextResponse.json({ error: error.message }, { status: 500 });
     }
-
-    return NextResponse.json({ data }, { status: 201 });
+    return NextResponse.json(
+      { message: 'Comment deleted successfully' },
+      { status: 200 }
+    );
   } catch (error) {
     if (error instanceof Error) {
       return NextResponse.json({ error: error.message }, { status: 500 });

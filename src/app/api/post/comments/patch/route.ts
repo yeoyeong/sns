@@ -2,14 +2,14 @@ import supabase from '@/_shared/util/supabase/client';
 import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 
-export async function POST(request: Request) {
+export async function PATCH(request: Request) {
   try {
     const cookieStore = cookies();
     const token = cookieStore.get('supabase-token')?.value;
 
     if (!token) {
       return NextResponse.json(
-        { error: 'Authorization token is required' },
+        { error: '인증 토큰이 필요합니다.' },
         { status: 401 }
       );
     }
@@ -22,10 +22,11 @@ export async function POST(request: Request) {
 
     if (userError || !user) {
       return NextResponse.json(
-        { error: 'Invalid or expired token' },
+        { error: '유효하지 않거나 만료된 토큰입니다.' },
         { status: 401 }
       );
     }
+
     // 사용자 인증 성공 후 데이터 가져오기 (예: 프로필 데이터)
     const { data: userData, error: userDataError } = await supabase
       .from('users')
@@ -39,39 +40,37 @@ export async function POST(request: Request) {
       );
     }
 
-    const { post_id, content, parent_id } = await request.json();
+    const { comment_id, content } = await request.json();
 
     // 필수 데이터 체크
-    if (!post_id || !content) {
+    if (!comment_id || !content) {
       return NextResponse.json(
-        { error: 'post_id and content required' },
+        { error: 'comment_id와 content는 필수입니다.' },
         { status: 400 }
       );
     }
 
-    // 댓글 또는 대댓글 삽입
-    const { data, error } = await supabase.from('comments').insert([
-      {
-        post_id,
+    // 댓글 업데이트
+    const { data, error } = await supabase
+      .from('comments')
+      .update({
         content,
-        parent_id,
-        nickname: userData[0].nickname,
-        user_id: userData[0].uid,
-        userId: userData[0].userId,
-      },
-    ]);
+        updated_at: new Date().toISOString(), // 업데이트 타임스탬프 추가
+      })
+      .eq('id', comment_id)
+      .eq('user_id', userData[0].uid); // 현재 사용자 확인
 
     if (error) {
       return NextResponse.json({ error: error.message }, { status: 500 });
     }
 
-    return NextResponse.json({ data }, { status: 201 });
+    return NextResponse.json({ data }, { status: 200 });
   } catch (error) {
     if (error instanceof Error) {
       return NextResponse.json({ error: error.message }, { status: 500 });
     }
     return NextResponse.json(
-      { error: 'An unexpected error occurred' },
+      { error: '예기치 못한 오류가 발생했습니다.' },
       { status: 500 }
     );
   }
