@@ -20,7 +20,7 @@ export default async function Page({ params }: Props) {
   return (
       <div>
         <HeaderUser username={username} />
-        <UserInfo userData={user} />
+        <UserInfo user={user} />
       </div>
     )
 }

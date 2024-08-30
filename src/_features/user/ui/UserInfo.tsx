@@ -1,6 +1,5 @@
 'use client';
 
-import { useEffect } from 'react';
 import { UserData } from '@/_features/i/lib/types/user';
 import Image from 'next/image';
 import setting_icon from '@/_shared/asset/icon/setting_icon.png';
@@ -12,21 +11,15 @@ import usePostUserFollow from '../model/query/usePostUserFollow';
 import UserInfoSetting from './UserInfo.setting';
 import UserInfoPatch from './UserInfo.modal';
 import UserInfoPost from './UserInfo.Post';
-import { userPageStore } from '../lib/types/store/store';
 
 type Props = {
-  userData: UserData;
+  user: UserData;
 };
 
-export default function UserInfo({ userData }: Props) {
+export default function UserInfo({ user }: Props) {
   const { user: myData } = useUserStore();
-  const { user, setUser } = userPageStore();
 
-  useEffect(() => {
-    setUser(userData);
-  }, []);
-
-  const { data, isLoading } = useGetUserStats({ uid: userData.uid });
+  const { data, isLoading } = useGetUserStats({ uid: user.uid });
 
   const { followingHandler } = usePostUserFollow();
   const { isOpen, setIsOpen, ref } = useOutsideClick();
@@ -55,7 +48,7 @@ export default function UserInfo({ userData }: Props) {
       <div className='flex justify-center gap-10 pt-16'>
         {isOpenPatch && (
           <div className='fixed z-10' ref={refPatch}>
-            <UserInfoPatch onClose={() => setIsOpenPatch(false)} />
+            <UserInfoPatch user={user} onClose={() => setIsOpenPatch(false)} />
           </div>
         )}
         <div className='flex flex-col items-center gap-4'>

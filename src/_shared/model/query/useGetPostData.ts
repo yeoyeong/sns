@@ -5,11 +5,13 @@ import { getPostApi } from '../api/getPostApi';
 type GetPostDataParams = {
   limit?: number;
   userId?: string | null;
+  queryKey?: string | null;
 };
 
 const useGetPostData = ({
   limit = 2,
   userId = null,
+  queryKey = 'posts',
 }: GetPostDataParams = {}) => {
   const {
     data,
@@ -20,7 +22,7 @@ const useGetPostData = ({
     fetchNextPage,
     hasNextPage,
   } = useInfiniteQuery({
-    queryKey: ['posts'],
+    queryKey: [queryKey],
     queryFn: ({ pageParam = 1 }) => getPostApi({ pageParam, limit, userId }),
     getNextPageParam: (lastPage, allPages) => {
       if (!lastPage.hasMore) return undefined;
