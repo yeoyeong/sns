@@ -1,7 +1,5 @@
-import { CommentPayload } from '@/_features/comments/lib/types/commentsType';
-import useCreateComments from '@/_features/comments/model/query/useCreateComments';
-import { useInput } from '@/_features/i/model';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
+import { CommentsInput } from '@/_features/comments/ui/comments.input';
 import PostListCommentsList from './post-list.commentsList';
 
 type Props = {
@@ -13,34 +11,15 @@ export default function PostListComments({
   post_id,
   commentsCount = 0,
 }: Props) {
-  const ref = useRef < HTMLInputElement > ({} as HTMLInputElement);
   const [isTyping, setIsTyping] = useState(false);
   const [isShowComments, setIsShowComments] = useState(false);
-  const { createPostHandler } = useCreateComments();
-  const { values, setValues, handleChange } = useInput({ comment: '' });
 
-  const isInputHandler = async () => {
-    await setIsTyping(true);
-    if (ref.current !== null) ref.current.focus(); // input에 focus
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key !== 'Enter' || values.comment.trim() === '') return;
-    e.preventDefault();
-    // post_id: number;
-    // content: string;
-    // parent_id?: number | null;
-    // nickname: string;
-    const formData: CommentPayload = {
-      content: values.comment,
-      post_id,
-    };
-    createPostHandler(formData);
-    setValues({ comment: '' }); // 댓글 입력 후 인풋 초기화
+  const isInputHandler = () => {
+    setIsTyping(true);
   };
 
   return (
-    <div className='mt-2 flex flex-col items-start gap-1'>
+    <div className='mt-2 flex w-[360px] flex-col items-start gap-1'>
       {!isShowComments ? (
         <button
           type='button'
@@ -60,18 +39,14 @@ export default function PostListComments({
         </>
       )}
       {!isTyping ? (
-        <button type='button' onClick={isInputHandler}>
+        <button type='button' onClick={isInputHandler} className='mt-1 pl-2'>
           댓글 달기 ...
         </button>
       ) : (
-        <input
-          ref={ref}
-          type='text'
-          name='comment'
-          onBlur={() => setIsTyping(false)}
-          value={values.comment}
-          onChange={handleChange}
-          onKeyDown={handleKeyDown}
+        <CommentsInput
+          post_id={post_id}
+          isTyping={isTyping}
+          setIsTyping={setIsTyping}
           placeholder='댓글 입력 . . .'
         />
       )}

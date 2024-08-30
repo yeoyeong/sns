@@ -16,8 +16,12 @@ export type CommentDeletePayload = {
 export type Comment = CommentPayload & {
     id: number;
     user_id: string | null;
-    userId: string | null;
     created_at: string;
     updated_at:string;
-    nickname: string;
+    users: {
+      userId: number;
+      nickname: string;
+      profileImg: string;
+    };
+    replies: Comment[] | null;
 }

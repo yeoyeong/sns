@@ -21,11 +21,11 @@ export default function InputField({
   return (
     <div className='mb-4'>
       <input
-        className={`rounded-3xl border bg-transparent py-3 pl-6 ${
+        className={`w-48 rounded-3xl border bg-transparent py-1 pl-6 ${
           error
             ? 'border-error-100 placeholder-error-100'
             : 'border-gray-300 placeholder-gray-300'
-        } w-full font-bold`}
+        } w-full font-semibold`}
         type={type}
         {...register(name, validation)}
         placeholder={placeholder}

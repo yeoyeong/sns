@@ -7,4 +7,9 @@ export type GetPostType = {
   created_at: string;
   commentsCount: number;
   likesCount: number;
+  users: {
+    userId: number;
+    nickname: string;
+    profileImg: string;
+  };
 };

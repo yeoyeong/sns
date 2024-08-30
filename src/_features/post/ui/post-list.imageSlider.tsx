@@ -1,11 +1,11 @@
-import Image from 'next/image';
+import Image, { StaticImageData } from 'next/image';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules'; // 모듈은 'swiper/modules'에서 import
 import { v4 } from 'uuid';
 import { CSSProperties, useMemo } from 'react';
 
 type Props = {
-  slideImages: string[];
+  slideImages: string[] | StaticImageData[];
 };
 export default function ImageSlider({ slideImages }: Props) {
   const imageStyle: CSSProperties = useMemo(
@@ -27,7 +27,7 @@ export default function ImageSlider({ slideImages }: Props) {
           navigation
           pagination={{ clickable: true }}
           className='h-64 w-full'>
-          {slideImages.map((slideImage) => (
+          {slideImages.map(slideImage => (
             <SwiperSlide
               key={v4()}
               className='flex items-center justify-center bg-gray-100'>
@@ -35,7 +35,7 @@ export default function ImageSlider({ slideImages }: Props) {
                 className='h-64 w-[360px] object-cover'
                 style={imageStyle}
                 src={slideImage}
-                alt={slideImage}
+                alt='포스트사진'
                 width={360}
                 height={64}
               />

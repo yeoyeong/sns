@@ -1,10 +1,11 @@
 import supabase from '@/_shared/util/supabase/client';
+import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 
 export async function DELETE(request: Request) {
   try {
-    // Authorization 헤더에서 Bearer 토큰 가져오기
-    const token = request.headers.get('Authorization')?.replace('Bearer ', '');
+    const cookieStore = cookies();
+    const token = cookieStore.get('supabase-token')?.value;
 
     if (!token) {
       return NextResponse.json(
@@ -14,7 +15,10 @@ export async function DELETE(request: Request) {
     }
 
     // Supabase를 통해 토큰 검증 및 사용자 정보 가져오기
-    const { data: user, error } = await supabase.auth.getUser(token);
+    const {
+      data: { user },
+      error,
+    } = await supabase.auth.getUser(token);
 
     if (error || !user) {
       return NextResponse.json(
@@ -44,7 +48,7 @@ export async function DELETE(request: Request) {
       return NextResponse.json({ error: 'Post not found' }, { status: 404 });
     }
 
-    if (post.user_id !== user.user.id) {
+    if (post.user_id !== user.id) {
       return NextResponse.json(
         { error: 'You can only delete your own posts' },
         { status: 403 }

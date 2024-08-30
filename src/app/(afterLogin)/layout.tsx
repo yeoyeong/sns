@@ -10,6 +10,7 @@ export default async function AfterLoginLayout({
   modal: React.ReactNode;
 }>) {
   const user = await getUserData(null);
+
   return (
     <ClientWrapper user={user}>
       <Header />

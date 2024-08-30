@@ -13,21 +13,15 @@ type Props = {
 export default async function Page({ params }: Props) {
   const { username } = params;
   const user = await getUserData(username);
-  const myData = await getMyData();
-  
-  if (!user || !myData) {
+
+  if (!user) {
     notFound();
-  }
-  
-  const CheckUserType =() =>{
-    if(myData?.uid !== user?.uid) return false
-    return true
   }
   
   return (
       <div>
         <HeaderUser username={username} />
-        <UserInfo user={user} isMe={CheckUserType()} myid={myData?.uid} />
+        <UserInfo userData={user} />
       </div>
     )
 }

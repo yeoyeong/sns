@@ -15,7 +15,7 @@ export default function SignupSuccess() {
       </p>
       <div className='flex w-[14.5625rem] flex-col gap-1'>
         <button
-          className='bg-blue-default text-white-100 mb-8 cursor-pointer rounded-3xl py-4 text-center'
+          className='bg-blue-default text-white-100 mb-8 cursor-pointer rounded-3xl py-1 text-center'
           type='button'
           onClick={handleNavigateToSecondModal}>
           로그인하러 가기

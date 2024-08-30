@@ -1,9 +1,8 @@
 'use client';
 
-import { UserData } from '@/_features/i/lib/types/user';
 import { usePathname } from 'next/navigation';
-import HeaderMain from './Header.mainPage';
 import { useUserStore } from '@/_shared/util/userStore';
+import HeaderMain from './Header.mainPage';
 
 export default function Header() {
   const pathname = usePathname().replace(/\//g, ''); // "/"를 제거합니다.

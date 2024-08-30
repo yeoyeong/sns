@@ -1,10 +1,11 @@
 import supabase from '@/_shared/util/supabase/client';
+import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 
 export async function PATCH(request: Request) {
   try {
-    // Authorization 헤더에서 Bearer 토큰 가져오기
-    const token = request.headers.get('Authorization')?.replace('Bearer ', '');
+    const cookieStore = cookies();
+    const token = cookieStore.get('supabase-token')?.value;
 
     if (!token) {
       return NextResponse.json(

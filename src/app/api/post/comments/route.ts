@@ -9,6 +9,12 @@ type Comment = {
   content: string;
   nickname: string;
   created_at: string;
+  user_id: number;
+  users: {
+    userId: number;
+    nickname: string;
+    profileImg: string;
+  };
   replies?: Comment[];
 };
 
@@ -28,7 +34,10 @@ export async function GET(request: Request) {
     }
 
     // Supabase를 통해 토큰 검증 및 사용자 정보 가져오기
-    const { data: user, error: userError } = await supabase.auth.getUser(token);
+    const {
+      data: { user },
+      error: userError,
+    } = await supabase.auth.getUser(token);
 
     if (userError || !user) {
       return NextResponse.json(
@@ -47,7 +56,16 @@ export async function GET(request: Request) {
     // 댓글 및 대댓글 가져오기
     const { data: comments, error } = await supabase
       .from('comments')
-      .select('*')
+      .select(
+        `
+        *,
+        users!comments_user_id_fkey (
+          userId,
+          nickname,
+          profileImg
+        )
+      `
+      )
       .eq('post_id', postId)
       .order('created_at', { ascending: true });
 

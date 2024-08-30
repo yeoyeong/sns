@@ -29,12 +29,31 @@ export async function GET(request: Request) {
     const page = parseInt(url.searchParams.get('page') || '1', 10);
     const limit = parseInt(url.searchParams.get('limit') || '10', 10);
     const offset = (page - 1) * limit; // offset = 시작 위치
+    const userId = url.searchParams.get('user_id'); // user_id 추출
 
     // 데이터 조회 (페이지네이션 적용)
-    const { data: posts, error: fetchError } = await supabase
+    let query = supabase
       .from('posts')
-      .select('*')
+      .select(
+        `
+        *,
+        users!posts_user_id_fkey (
+          userId,
+          nickname,
+          profileImg
+        )
+      `
+      )
+      .order('created_at', { ascending: false })
       .range(offset, offset + limit - 1);
+
+    // user_id가 있는 경우 필터링 추가
+    if (userId && userId !== 'null') {
+      query = query.eq('user_id', userId);
+    }
+
+    // 데이터 조회 (페이지네이션 및 필터 적용)
+    const { data: posts, error: fetchError } = await query;
 
     if (fetchError) {
       return NextResponse.json({ error: fetchError.message }, { status: 500 });
@@ -42,7 +61,7 @@ export async function GET(request: Request) {
 
     // 각 포스트에 대해 댓글 및 좋아요 수를 가져오기
     const postsWithCounts = await Promise.all(
-      posts.map(async (post) => {
+      posts.map(async post => {
         const { id: postId } = post;
 
         // 댓글 수 가져오기

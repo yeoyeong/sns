@@ -57,7 +57,6 @@ export async function POST(request: Request) {
         parent_id,
         nickname: userData[0].nickname,
         user_id: userData[0].uid,
-        userId: userData[0].userId,
       },
     ]);
 

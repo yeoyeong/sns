@@ -9,7 +9,7 @@ type UserState = {
 export const useUserStore =
   create <
   UserState >
-  ((set) => ({
+  (set => ({
     user: null, // 초기값을 null로 설정
-    setUser: (user) => set({ user }),
+    setUser: user => set({ user }),
   }));
