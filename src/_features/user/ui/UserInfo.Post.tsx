@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import default_img from '@/_shared/asset/post_default_image.webp';
 import HeartIcon from '@/_shared/asset/icon/heart_icon.svg';
+
 type Props = {
   userId: string;
 };

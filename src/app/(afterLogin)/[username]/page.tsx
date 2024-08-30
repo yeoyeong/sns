@@ -1,5 +1,4 @@
 
-import { getMyData } from '@/_features/i/model/api/getMyData';
 import { getUserData } from '@/_features/i/model/api/getUserData';
 import { HeaderUser, UserInfo } from '@/_features/user';
 import { notFound } from 'next/navigation';

@@ -1,5 +1,3 @@
-import { PostCard } from '@/_features/post';
-
 type Props = {
   params: {
     postId: string;

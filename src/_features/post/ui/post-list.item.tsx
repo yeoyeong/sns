@@ -1,8 +1,8 @@
 import Link from 'next/link';
+import default_img from '@/_shared/asset/post_default_image.webp';
 import PostListDate from './post-list.date';
 import ImageSlider from './post-list.imageSlider';
 import PostListContent from './post-list.content';
-import default_img from '@/_shared/asset/post_default_image.webp';
 
 type Props = {
   content: string;

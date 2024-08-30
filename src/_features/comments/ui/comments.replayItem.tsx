@@ -6,7 +6,7 @@ import UserIcon from '@/_widget/user/UserIcon';
 import { Comment } from '../lib/types/commentsType';
 import CommentsSetting from './comments.setting';
 import useTypingStore from '../lib/store/store';
-import CommentsContents from './comments.contents';
+import CommentsReplayContents from './comments.replayContents';
 
 
 
@@ -16,7 +16,7 @@ type Props = {
   post_id:number;
   isReplay?:boolean
 };
-export default function CommentsItem({ comment, post_id, isReplay = false }: Props) {
+export default function CommentsReplayItem({ comment, post_id, isReplay = false }: Props) {
     const { user } = useUserStore();
   const { isTyping, setIsTyping } = useTypingStore();
 
@@ -49,13 +49,12 @@ export default function CommentsItem({ comment, post_id, isReplay = false }: Pro
         </div>
         </div>
         <div className='ml-[18px] flex justify-between'>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
-            <CommentsContents
+            <CommentsReplayContents
                 isEditMode={isEditMode}
                 comment_id={comment.id}
                 comment_content={comment.content}
                 setIsEditMode={setIsEditMode}
                 post_id={post_id}
-                replies={comment.replies}
             />
             
         </div>

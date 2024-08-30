@@ -1,30 +1,24 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { useInput } from '@/_features/i/model';
-import ArrowIcon from '@/_shared/asset/icon/arrow_icon.svg';
 import usePatchComments from '../model/query/usePatchComments';
 import CommentsReplay from './comments.replay';
-import { Comment } from '../lib/types/commentsType';
-import CommentsReplayItem from './comments.replayItem';
 
 type Props = {
   comment_content: string;
   comment_id: number;
   post_id: number;
-  replies: Comment[] | null;
   isEditMode: number | undefined;
   setIsEditMode: React.Dispatch<React.SetStateAction<number | undefined>>;
 };
-export default function CommentsContents({
+export default function CommentsReplayContents({
   comment_content,
   comment_id,
   post_id,
-  replies,
   isEditMode,
   setIsEditMode,
 }: Props) {
   const inputRef =
     useRef < HTMLInputElement > (null as HTMLInputElement | null);
-  const [isShowReplies, SetIsShowReplies] = useState(false);
   const { createPostHandler } = usePatchComments();
   const { values, handleChange } = useInput({
     content: comment_content ?? '',
@@ -60,33 +54,7 @@ export default function CommentsContents({
       ) : (
         <div>
           <p className='max-w-72 text-sm'>{comment_content}</p>
-          {!isShowReplies && replies && (
-            <button
-              className='flex items-center gap-1 text-sm text-gray-300'
-              onClick={() => SetIsShowReplies(true)}
-              type='button'>
-              <ArrowIcon className='rotate-180' />
-              답글 {replies.length}개
-            </button>
-          )}
-          {isShowReplies && replies && (
-            <>
-              <button
-                className='mb-1 flex items-center gap-1 text-sm text-gray-300'
-                onClick={() => SetIsShowReplies(false)}
-                type='button'>
-                <ArrowIcon />
-                답글 {replies.length}개
-              </button>
-              {replies.map(comment => (
-                <CommentsReplayItem
-                  comment={comment}
-                  post_id={post_id}
-                  isReplay
-                />
-              ))}
-            </>
-          )}
+
           <CommentsReplay comment_id={comment_id} post_id={post_id} />
         </div>
       )}

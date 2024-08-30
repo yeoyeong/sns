@@ -1,18 +1,18 @@
 'use client';
 
+import { useEffect } from 'react';
 import { UserData } from '@/_features/i/lib/types/user';
 import Image from 'next/image';
 import setting_icon from '@/_shared/asset/icon/setting_icon.png';
 import user_icon from '@/_shared/asset/icon/header-user_icon.png';
 import useOutsideClick from '@/_shared/lib/hooks/useOutsideClick';
+import { useUserStore } from '@/_shared/util/userStore';
 import useGetUserStats from '../model/query/useGetUserStats';
 import usePostUserFollow from '../model/query/usePostUserFollow';
 import UserInfoSetting from './UserInfo.setting';
 import UserInfoPatch from './UserInfo.modal';
 import UserInfoPost from './UserInfo.Post';
-import { useUserStore } from '@/_shared/util/userStore';
 import { userPageStore } from '../lib/types/store/store';
-import { useEffect, useState } from 'react';
 
 type Props = {
   userData: UserData;

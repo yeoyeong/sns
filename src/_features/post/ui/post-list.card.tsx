@@ -6,12 +6,13 @@ import Likes from '@/_features/likes/ui/likes';
 import Image from 'next/image';
 import UserIcon from '@/_widget/user/UserIcon';
 import setting_icon from '@/_shared/asset/icon/setting_icon.png';
-import { GetPostType } from '../lib/type/getPostType';
-import PostListComments from './post-list.comments';
-import PostListItem from './post-list.item';
 import { useUserStore } from '@/_shared/util/userStore';
 import usePostUserFollow from '@/_features/user/model/query/usePostUserFollow';
 import useOutsideClick from '@/_shared/lib/hooks/useOutsideClick';
+import { GetPostType } from '../lib/type/getPostType';
+import PostListComments from './post-list.comments';
+import PostListItem from './post-list.item';
+
 import PostSetting from './post-list.postSetting';
 
 type Props = {

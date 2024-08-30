@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import ImodalLayout from '@/_shared/ui/layout/i-modal-layout';
-import Image from 'next/image';
 import GoogleLogo from '@/_shared/asset/logo/google_login_logo.svg';
 import { useGoogleLogin } from '../../model';
 import LoginFormEmail from './login-form.email';
@@ -18,7 +17,10 @@ export default function Loginform() {
           회원가입
         </Link>
       </div>
-      <button type='submit' onClick={signInWithGoogle}>
+      <button
+        type='submit'
+        onClick={signInWithGoogle}
+        aria-label='Sign in with Google'>
         <GoogleLogo />
       </button>
     </ImodalLayout>

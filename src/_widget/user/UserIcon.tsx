@@ -6,25 +6,21 @@ type Props = {
 };
 
 export default function UserIcon({ profileImg }: Props) {
-  return (
-    <>
-      {profileImg ? (
-        <Image
-          src={profileImg}
-          width={27}
-          height={27}
-          alt='유저 아이콘'
-          className='h-full w-full object-cover'
-        />
-      ) : (
-        <Image
-          src={user_icon}
-          width={27}
-          height={27}
-          alt='유저 아이콘'
-          className='h-full w-full object-cover'
-        />
-      )}
-    </>
+  return profileImg ? (
+    <Image
+      src={profileImg}
+      width={27}
+      height={27}
+      alt='유저 아이콘'
+      className='h-full w-full object-cover'
+    />
+  ) : (
+    <Image
+      src={user_icon}
+      width={27}
+      height={27}
+      alt='유저 아이콘'
+      className='h-full w-full object-cover'
+    />
   );
 }
