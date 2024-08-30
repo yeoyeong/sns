@@ -97,7 +97,7 @@ export default function SignupAccountInfo({setStep}:Props) {
           error={errors.email}
         />
       </div>
-      <input className="cursor-pointer py-4 mb-8 rounded-3xl flex bg-blue-default text-white-100" type='submit' value="다음"/>
+      <input className="cursor-pointer py-1 mb-8 rounded-3xl flex bg-blue-default text-white-100" type='submit' value="다음"/>
     </form>
   );
 }

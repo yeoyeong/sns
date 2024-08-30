@@ -44,6 +44,7 @@ export default function useInput<T extends { [key: string]: number | string }>(i
 
   return {
     values,
+    setValues,
     register,
     handleKeyDown,
     handleChange,

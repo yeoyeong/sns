@@ -8,10 +8,10 @@ const usePostUserFollow = () => {
   const mutation = useMutation({
     mutationFn: postToFollowApi,
     onSuccess: () => {
-      alert('팔로우가 성공적으로 완료되었습니다.');
+      alert('성공적으로 완료되었습니다.');
       queryClient.invalidateQueries({ queryKey: ['userStats'] });
     },
-    onError: (error) => {
+    onError: error => {
       alert('오류가 발생하였습니다. 관리자에게 문의해주세요');
       if (error instanceof Error) {
         console.log(error.message);

@@ -1,86 +1,88 @@
-'use client'
+'use client';
 
-/**
- * id
- * user_id
- * content
- * weather
- * picture
- * created_at
- * 좋아요 갯수 / 여부
- * 댓글 갯수?
- * 댓글 달기
- * */
-import { v4 as uuidv4 } from 'uuid';
-import HeartIcon  from "@/_shared/asset/icon/heart_icon.svg"
-import message_icon from "@/_shared/asset/icon/message_icon.png"
+import Link from 'next/link';
+import message_icon from '@/_shared/asset/icon/message_icon.png';
+import Likes from '@/_features/likes/ui/likes';
 import Image from 'next/image';
+import UserIcon from '@/_widget/user/UserIcon';
+import setting_icon from '@/_shared/asset/icon/setting_icon.png';
+import { useUserStore } from '@/_shared/util/userStore';
+import usePostUserFollow from '@/_features/user/model/query/usePostUserFollow';
+import useOutsideClick from '@/_shared/lib/hooks/useOutsideClick';
+import { GetPostType } from '../lib/type/getPostType';
+import PostListComments from './post-list.comments';
+import PostListItem from './post-list.item';
 
-const mock = {
-  id:1,
-  user_id:"123123",
-  content:"점심 시간에는 친한 친구들과 대화하지않고 조용히 밥을 먹고 일어나요.",
-  weather:"맑음",
-  picture:["https://i.pinimg.com/564x/94/6e/5d/946e5dc23e1e1e0cef85e97b2ea43721.jpg"],
-  createdAt:new Date()
-}
-export default function PostCard() {
-  const {content, weather, picture, createdAt} = mock
-  const contentArray = content.split("")
-  const adjustedLength = Math.ceil(contentArray.length / 10) * 10; // 배열 길이를 10의 배수로 올림
-  // contentArray의 길이를 10의 배수로 맞추기 위해 빈 문자열을 추가합니다.
-  while (contentArray.length < adjustedLength) {
-    contentArray.push(""); // 빈 문자열 추가
-  }
+import PostSetting from './post-list.postSetting';
 
-  const date = new Date(createdAt);
-  const year = date.getFullYear();
-  const month = date.toLocaleString('ko-KR', { month: 'long' }); // "10월"
-  const day = date.getDate();
-  const dayOfWeek = date.toLocaleString('ko-KR', { weekday: 'long' }); // "금요일"
+type Props = {
+  data: GetPostType;
+};
+export default function PostCard({ data }: Props) {
+  const {
+    id,
+    content,
+    weather,
+    picture,
+    created_at: createdAt,
+    likesCount,
+    user_id,
+  } = data;
+  const { user } = useUserStore();
+  const { followingHandler } = usePostUserFollow();
+  const { isOpen, setIsOpen, ref } = useOutsideClick();
 
   return (
-    <div className='mt-6'>
-      <div className='w-[360px] grid card-grid border border-solid border-blue-300 items-center'>
-        <p className='flex items-center justify-center h-9 border-r border-solid border-blue-300'>날짜</p>
-        <ul className='flex items-center pl-2'>
-        {/* <ul className='grid grid-cols-4 h-9 items-center text-lg'> */}
-          <li>{year}년</li>
-          <li>{month}</li>
-          <li>{day}일</li>
-          <li>{dayOfWeek}</li>
-        </ul>
-        <p className='flex items-center justify-center h-9 border-l border-r border-solid border-blue-300'>날씨</p>
-        <p className='text-center'>{weather}</p>
-      </div>
-      <div className='w-[360px] mt-1'>
-        {picture.map((url)=>(
-          <img key={url} src={url} alt={url} />
-        ))}
-      </div>
-      <div className="grid grid-cols-10 border-l mt-1 w-[360px] border-t border-solid border-blue-300">
-        {contentArray.map((char) => (
-          <div
-            className="flex items-center justify-center w-9 aspect-square border-r border-b border-solid border-blue-300 text-lg"
-            key={uuidv4()}>
-            {char}
+    <div className='mt-6 border-b border-solid border-gray-200 pb-6'>
+      <div className='flex justify-between'>
+        <Link
+          href={`/${data.users.userId}`}
+          className='flex items-center gap-1 py-2'>
+          <div className='block h-[27px] w-[27px] overflow-hidden rounded-full'>
+            <UserIcon profileImg={data.users.profileImg} />
           </div>
-        ))}
-      </div>
-      <div className='flex gap-1 mt-4'>
-        <div>
-          <HeartIcon fill="none" stroke="#848484"/>
-          {/* <HeartIcon fill="red"/> */}
+          <p className='text-lg font-bold'>{data.users.nickname}</p>
+        </Link>
+        <div className='flex items-center'>
+          {user && user.uid !== user_id ? (
+            <button
+              onClick={() =>
+                followingHandler({
+                  followerId: user.uid,
+                  followingId: user_id,
+                })
+              }
+              className='rounded-lg bg-gray-200 px-2 py-1 text-sm font-bold shadow-md'
+              type='button'>
+              팔로우
+            </button>
+          ) : (
+            <div className='relative' ref={ref}>
+              <button
+                className='flex h-[32px] items-center'
+                type='button'
+                onClick={() => setIsOpen(true)}>
+                <Image src={setting_icon} width={16} alt='설정 아이콘' />
+              </button>
+              {isOpen && <PostSetting postId={id} />}
+            </div>
+          )}
         </div>
+      </div>
+      <PostListItem
+        content={content}
+        picture={picture}
+        weather={weather}
+        postId={data.id}
+        createdAt={createdAt}
+      />
+      <div className='mt-4 flex gap-1'>
+        <Likes post_id={data.id} likesCount={likesCount} />
         <div>
-          <Image src={message_icon} alt="채팅 아이콘" height={24} />
+          <Image src={message_icon} alt='채팅 아이콘' height={24} />
         </div>
       </div>
-      <div className='flex flex-col items-start gap-1 mt-2'>
-        <button type="button">댓글 {0}개 모두 보기</button>
-        <button type="button">댓글 달기 ...</button>
-        {/* <input type="text" placeholder='댓글 입력'/> */}
-      </div>
+      <PostListComments post_id={data.id} commentsCount={data.commentsCount} />
     </div>
   );
 }

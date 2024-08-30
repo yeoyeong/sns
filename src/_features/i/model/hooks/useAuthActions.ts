@@ -59,7 +59,7 @@ const useAuthActions = () => {
   const signOut = async () => {
     try {
       await SignOutApi();
-      router.push('/');
+      router.push('/login');
     } catch (error) {
       console.error('Error logging out:', error);
       // TODO: 에러처리

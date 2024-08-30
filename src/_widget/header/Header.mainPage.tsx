@@ -1,12 +1,12 @@
 import Link from 'next/link';
 import alarm_icon from '@/_shared/asset/icon/header-alarm_icon.png';
 import message_icon from '@/_shared/asset/icon/message_icon.png';
-import user_icon from '@/_shared/asset/icon/header-user_icon.png';
 import SearchIcon from '@/_shared/asset/icon/search_icon.svg';
 import logo from '@/_shared/asset/logo/logo.png';
 import Image from 'next/image';
 import { useState } from 'react';
 import { UserData } from '@/_features/i/lib/types/user';
+import UserIcon from '../user/UserIcon';
 
 type Props = {
   user: UserData;
@@ -53,23 +53,7 @@ export default function HeaderMain({ user }: Props) {
             <Link
               href={`/${user.userId}`}
               className='block h-[27px] w-[27px] overflow-hidden rounded-full'>
-              {user.profileImg ? (
-                <Image
-                  src={user.profileImg}
-                  width={27}
-                  height={27}
-                  alt='유저 아이콘'
-                  className='h-full w-full object-cover'
-                />
-              ) : (
-                <Image
-                  src={user_icon}
-                  width={27}
-                  height={27}
-                  alt='유저 아이콘'
-                  className='h-full w-full object-cover'
-                />
-              )}
+              <UserIcon profileImg={user.profileImg} />
             </Link>
           </li>
         </ul>

@@ -43,7 +43,7 @@ export default function LoginFormEmail() {
           error={errors.password}
         />
       </div>
-      <input className="cursor-pointer py-4 rounded-3xl flex bg-blue-default text-white-100" type='submit' value="로그인"/>
+      <input className="cursor-pointer py-1 rounded-3xl flex bg-blue-default text-white-100" type='submit' value="로그인"/>
     </form>
   );
 }

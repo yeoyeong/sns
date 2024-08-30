@@ -6,7 +6,7 @@
   "singleQuote": true,
   "trailingComma": "es5",
   "bracketSpacing": true,
-  "arrowParens": "always",
+  "arrowParens": "avoid",
   "endOfLine": "lf",
   "jsxSingleQuote": true,
   "htmlWhitespaceSensitivity": "css",
@@ -23,5 +23,6 @@
   "importOrderSeparation": true,
   "importOrderSortSpecifiers": true,
   "importOrderTypeScriptVersion": "5.0.0",
-  "editor.formatOnSave": true 
+  "editor.formatOnSave": true,
+  "parser": "typescript"
 }

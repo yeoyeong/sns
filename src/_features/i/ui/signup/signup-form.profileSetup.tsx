@@ -99,8 +99,8 @@ export default function SignupProfileSetup({ setStep }: Props) {
         {errors.nickname?.message && <p className="ml-3 text-xs text-red-500">{errors.nickname.message}</p>}
       </div>
       <div className="flex flex-col gap-1 w-[14.5625rem]">
-        <input className="cursor-pointer py-4 rounded-3xl flex bg-gray-300 text-gray-200" type="button" value="이전" onClick={()=>setStep(prev=>prev-1)} />
-        <input className="cursor-pointer py-4 mb-8 rounded-3xl flex bg-blue-default text-white-100" type='submit' value="완료"/>
+        <input className="cursor-pointer py-1 rounded-3xl flex bg-gray-300 text-gray-200" type="button" value="이전" onClick={()=>setStep(prev=>prev-1)} />
+        <input className="cursor-pointer py-1 mb-8 rounded-3xl flex bg-blue-default text-white-100" type='submit' value="완료"/>
       </div>
     </form>
   );
