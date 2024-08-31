@@ -24,36 +24,28 @@ export default function EditForm() {
       handleSubmit,
     } = useForm<WritingFormData>();
 
-    // TODO: PATCH핸들러만들기
-
     const { onSubmit } = useUpload();
 
     if(isLoading) {
       return <div>로딩중. . .</div>
     }
 
-    
-    
-
-  
-    
-
-  return (
-    <form
-      className='flex h-full w-full max-w-[420px] flex-col justify-between px-4 pt-5'
-      onSubmit={handleSubmit(data =>
-        onSubmit({ data, postHandler, picture })
-      )}
-      >
-      {postData && <div>
-        <InputContent register={register} errors={errors} content={postData.content} weather={postData.weather}/>
-        <InputPhoto picture={postData.picture}/>
-      </div>}
-      <input
-        className='bg-blue-default text-white-100 mb-4 flex w-full cursor-pointer rounded-3xl py-4'
-        type='submit'
-        value='완료'
-      />
-    </form>
+    return (
+      <form
+        className='flex h-full w-full max-w-[420px] flex-col justify-between px-4 pt-5'
+        onSubmit={handleSubmit(data =>
+          onSubmit({ data, postHandler, picture })
+        )}
+        >
+        {postData && <div>
+          <InputContent register={register} errors={errors} content={postData.content} weather={postData.weather}/>
+          <InputPhoto picture={postData.picture}/>
+        </div>}
+        <input
+          className='bg-blue-default text-white-100 mb-4 flex w-full cursor-pointer rounded-3xl py-4'
+          type='submit'
+          value='완료'
+        />
+      </form>
   );
 }

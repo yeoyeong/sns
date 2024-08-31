@@ -12,6 +12,7 @@ import useGetUserStats from '../model/query/useGetUserStats';
 import UserInfoSetting from './UserInfo.setting';
 import UserInfoPatch from './UserInfo.modal';
 import UserInfoPost from './UserInfo.Post';
+import UserInfoFollow from './UserInfo.follow';
 
 type Props = {
   user: UserData;
@@ -113,18 +114,11 @@ export default function UserInfo({ user }: Props) {
                 {isLoading ? 0 : data.postCount}
               </p>
             </li>
-            <li>
-              <p>
-                <span className='mr-1 font-bold'>팔로워</span>
-                {isLoading ? 0 : data.followerCount}
-              </p>
-            </li>
-            <li>
-              <p>
-                <span className='mr-1 font-bold'>팔로잉</span>
-                {isLoading ? 0 : data.followingCount}
-              </p>
-            </li>
+            <UserInfoFollow
+              followerCount={data.followerCount}
+              followingCount={data.followingCount}
+              userId={user.uid}
+            />
           </ul>
           <p className='text-gray-300'>
             {user.oneLiner
