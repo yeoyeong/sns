@@ -45,7 +45,9 @@ export default function UserInfoFollow({
         </p>
       </li>
       <div ref={ref}>
-        {isOpen && <FollowList userId={userId} type={type} />}
+        {isOpen && (
+          <FollowList userId={userId} type={type} setIsOpen={setIsOpen} />
+        )}
       </div>
     </>
   );
