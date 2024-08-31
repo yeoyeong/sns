@@ -17,19 +17,19 @@ export default function PhotoDraggableItem({
 }: Props) {
   return (
     <Draggable draggableId={id} index={index}>
-      {(providedInner) => (
+      {providedInner => (
         <div
           ref={providedInner.innerRef}
           {...providedInner.draggableProps}
           {...providedInner.dragHandleProps}
           className='relative'>
-          <div className='aspect-square w-14 overflow-hidden rounded-2xl'>
+          <div className='aspect-square w-[57px] overflow-hidden rounded-2xl'>
             <Image
               className='h-full w-full object-cover'
               src={src}
               alt='미리보기 이미지'
-              width={60}
-              height={60}
+              width={57}
+              height={57}
             />
           </div>
           <button

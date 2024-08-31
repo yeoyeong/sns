@@ -4,9 +4,16 @@ import { WritingFormData } from '../lib/types/write';
 interface Props {
   register: UseFormRegister<WritingFormData>;
   errors: FieldErrors<WritingFormData>;
+  content?: string;
+  weather?: string;
 }
 
-export default function InputContent({ register, errors }: Props) {
+export default function InputContent({
+  register,
+  errors,
+  content,
+  weather,
+}: Props) {
   return (
     <div className='mb-4 flex flex-col gap-3'>
       <div className='flex'>
@@ -16,6 +23,7 @@ export default function InputContent({ register, errors }: Props) {
             type='text'
             className='w-32 border-l border-solid border-gray-300 py-4 text-center'
             {...register('weather')}
+            defaultValue={weather}
           />
           {errors.weather && (
             <p className='text-red-500'>{errors.weather.message}</p>
@@ -26,6 +34,7 @@ export default function InputContent({ register, errors }: Props) {
         className='h-36 resize-none rounded-2xl border border-solid border-gray-300 px-2 py-2'
         placeholder='오늘 어떤 일이 있으셨나요?'
         {...register('content')}
+        defaultValue={content}
       />
       {errors.content && (
         <p className='text-red-500'>{errors.content.message}</p>

@@ -1,22 +1,24 @@
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import userIcon from "@/_shared/asset/icon/userIcon.png"
 import { useForm } from "react-hook-form";
 import { useUploadImgGetUrl } from "@/_features/i/model";
-import { ProfileSetup } from "@/_features/i/lib/types/user";
+import { ProfileSetup, UserData } from "@/_features/i/lib/types/user";
 import { patchPostApi } from "../model/api/patchUserData";
-import { userPageStore } from "../lib/types/store/store";
+
 
 
 type Props = {
   onClose: () => void;
+  user: UserData;
 };
 
-export default function ProfilePatch({onClose}:Props) {
-  const { user, setUser } = userPageStore()
+export default function ProfilePatch({onClose, user}:Props) {
+  const route = useRouter()
   const { uploadImg } = useUploadImgGetUrl()
   const [profileImg, setProfileImg] = useState<null|File>(null);
-  const [imagePath, setImagePath] = useState(user?.profileImg??'');
+  const [imagePath, setImagePath] = useState(user.profileImg??'');
   
   const {
     register,
@@ -34,10 +36,10 @@ export default function ProfilePatch({onClose}:Props) {
         profileImgUrl = await uploadImg(profileImg, 'profile_img');
       }
   
-      formData = { ...data, profileImg: profileImgUrl || user?.profileImg };
+      formData = { ...data, profileImg: profileImgUrl || user.profileImg };
   
-      const res = await patchPostApi(formData);
-      setUser(res.data)
+      await patchPostApi(formData);
+      route.refresh()
       onClose()
     } catch (error) {
       // TODO: 에러처리
@@ -107,7 +109,7 @@ export default function ProfilePatch({onClose}:Props) {
               message: '닉네임은 최소 4글자 이상이어야 합니다'
             }
           })}
-          defaultValue={user?.nickname}
+          defaultValue={user.nickname}
           placeholder="닉네임을 입력해주세요."
         />
         {errors.nickname?.message && <p className="ml-3 text-xs text-red-500">{errors.nickname.message}</p>}

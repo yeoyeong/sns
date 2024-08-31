@@ -1,35 +1,35 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { UserData } from '@/_features/i/lib/types/user';
 import Image from 'next/image';
 import setting_icon from '@/_shared/asset/icon/setting_icon.png';
 import user_icon from '@/_shared/asset/icon/header-user_icon.png';
 import useOutsideClick from '@/_shared/lib/hooks/useOutsideClick';
 import { useUserStore } from '@/_shared/util/userStore';
+import FollowButton from '@/_features/followers/ui/FollowButton';
 import useGetUserStats from '../model/query/useGetUserStats';
-import usePostUserFollow from '../model/query/usePostUserFollow';
 import UserInfoSetting from './UserInfo.setting';
 import UserInfoPatch from './UserInfo.modal';
 import UserInfoPost from './UserInfo.Post';
-import { userPageStore } from '../lib/types/store/store';
+import UserInfoFollow from './UserInfo.follow';
 
 type Props = {
-  userData: UserData;
+  user: UserData;
 };
 
-export default function UserInfo({ userData }: Props) {
+export default function UserInfo({ user }: Props) {
   const { user: myData } = useUserStore();
-  const { user, setUser } = userPageStore();
+  const [isUserType, setIsUserType] = useState(false);
+  const { data, isLoading } = useGetUserStats({ uid: user.uid });
+  const { isOpen, setIsOpen, ref } = useOutsideClick();
 
   useEffect(() => {
-    setUser(userData);
-  }, []);
+    if (!myData) return;
+    if (myData.uid !== user.uid) setIsUserType(false);
+    else setIsUserType(true);
+  }, [myData]);
 
-  const { data, isLoading } = useGetUserStats({ uid: userData.uid });
-
-  const { followingHandler } = usePostUserFollow();
-  const { isOpen, setIsOpen, ref } = useOutsideClick();
   const {
     isOpen: isOpenPatch,
     setIsOpen: setIsOpenPatch,
@@ -41,12 +41,7 @@ export default function UserInfo({ userData }: Props) {
     setIsOpen(false);
   };
 
-  const isUserType = () => {
-    if (myData?.uid !== user.uid) return false;
-    return true;
-  };
-
-  if (!data || isLoading || !myData) {
+  if (!myData || isLoading) {
     return null;
   }
 
@@ -55,7 +50,7 @@ export default function UserInfo({ userData }: Props) {
       <div className='flex justify-center gap-10 pt-16'>
         {isOpenPatch && (
           <div className='fixed z-10' ref={refPatch}>
-            <UserInfoPatch onClose={() => setIsOpenPatch(false)} />
+            <UserInfoPatch user={user} onClose={() => setIsOpenPatch(false)} />
           </div>
         )}
         <div className='flex flex-col items-center gap-4'>
@@ -96,17 +91,7 @@ export default function UserInfo({ userData }: Props) {
             </div>
             <div>
               {!isUserType ? (
-                <button
-                  onClick={() =>
-                    followingHandler({
-                      followerId: myData.uid,
-                      followingId: user.uid,
-                    })
-                  }
-                  className='rounded-lg bg-gray-200 px-2 font-semibold shadow-md'
-                  type='button'>
-                  팔로우
-                </button>
+                <FollowButton followerId={myData.uid} followingId={user.uid} />
               ) : (
                 <div className='relative' ref={ref}>
                   <button
@@ -129,18 +114,11 @@ export default function UserInfo({ userData }: Props) {
                 {isLoading ? 0 : data.postCount}
               </p>
             </li>
-            <li>
-              <p>
-                <span className='mr-1 font-bold'>팔로우</span>
-                {isLoading ? 0 : data.followerCount}
-              </p>
-            </li>
-            <li>
-              <p>
-                <span className='mr-1 font-bold'>팔로워</span>
-                {isLoading ? 0 : data.followingCount}
-              </p>
-            </li>
+            <UserInfoFollow
+              followerCount={data.followerCount}
+              followingCount={data.followingCount}
+              userId={user.uid}
+            />
           </ul>
           <p className='text-gray-300'>
             {user.oneLiner

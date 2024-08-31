@@ -1,6 +1,7 @@
 
 import { getUserData } from '@/_features/i/model/api/getUserData';
-import { HeaderUser, UserInfo } from '@/_features/user';
+import { UserInfo } from '@/_features/user';
+import { DetailHeader } from '@/_widget';
 import { notFound } from 'next/navigation';
 
 type Props = {
@@ -19,8 +20,8 @@ export default async function Page({ params }: Props) {
   
   return (
       <div>
-        <HeaderUser username={username} />
-        <UserInfo userData={user} />
+        <DetailHeader title={username} />
+        <UserInfo user={user} />
       </div>
     )
 }

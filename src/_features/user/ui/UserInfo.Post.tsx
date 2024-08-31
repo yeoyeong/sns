@@ -8,7 +8,12 @@ type Props = {
   userId: string;
 };
 export default function UserInfoPost({ userId }: Props) {
-  const { data: posts, isSuccess, isLoading, ref } = useGetPostData({ userId });
+  const {
+    data: posts,
+    isSuccess,
+    isLoading,
+    ref,
+  } = useGetPostData({ userId, queryKey: 'user_post', limit: 6 });
 
   if (isLoading) return <div>로딩중</div>;
   if (isSuccess) {
@@ -17,6 +22,7 @@ export default function UserInfoPost({ userId }: Props) {
         {posts &&
           posts.map(post => (
             <Link
+              key={post.id}
               href={`post/${post.id.toString()}`}
               className='group relative aspect-square'>
               <Image

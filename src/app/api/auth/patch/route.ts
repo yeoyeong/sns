@@ -48,30 +48,10 @@ export async function PATCH(request: Request) {
       return NextResponse.json({ error: updateError.message }, { status: 500 });
     }
 
-    // 2. 업데이트된 사용자 정보 가져오기
-    const { data: userData, error: userErrorData } = await supabase
-      .from('users')
-      .select('*') // 모든 컬럼을 선택
-      .eq('uid', user.id); // 사용자의 ID를 기준으로 필터링
-
-    if (userErrorData || !userData || userData.length === 0) {
-      return NextResponse.json(
-        { error: 'Failed to fetch updated user data' },
-        { status: 500 }
-      );
-    }
-
-    // 업데이트된 사용자 데이터를 반환
-    const userDetails = {
-      uid: userData[0].uid,
-      userId: userData[0].userId,
-      nickname: userData[0].nickname,
-      profileImg: userData[0].profileImg,
-      oneLiner: userData[0].oneLiner,
-    };
-
     return NextResponse.json(
-      { message: 'User profile updated successfully', data: userDetails },
+      {
+        message: 'User profile updated successfully',
+      },
       { status: 200 }
     );
   } catch (error) {

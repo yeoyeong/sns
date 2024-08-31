@@ -1,18 +1,15 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 import useIntersect from '@/_shared/lib/hooks/useIntersect';
-import { getPostApi } from '../api/getPostApi';
+import { getFollowListApi } from '../api/getFollowListApi';
 
-type GetPostDataParams = {
+type Props = {
   limit?: number;
-  userId?: string | null;
   queryKey?: string | null;
+  userId: string;
+  type: string;
 };
-
-const useGetPostData = ({
-  limit = 2,
-  userId = null,
-  queryKey = 'posts',
-}: GetPostDataParams = {}) => {
+// type = following, follower
+const useGetFollowList = ({ limit = 2, type = 'following', userId }: Props) => {
   const {
     data,
     isLoading,
@@ -22,8 +19,9 @@ const useGetPostData = ({
     fetchNextPage,
     hasNextPage,
   } = useInfiniteQuery({
-    queryKey: [queryKey],
-    queryFn: ({ pageParam = 1 }) => getPostApi({ pageParam, limit, userId }),
+    queryKey: ['post_follow', userId],
+    queryFn: ({ pageParam = 1 }) =>
+      getFollowListApi({ pageParam, limit, userId, type }),
     getNextPageParam: (lastPage, allPages) => {
       if (!lastPage.hasMore) return undefined;
       return allPages.length + 1; // 다음 페이지의 번호
@@ -48,4 +46,4 @@ const useGetPostData = ({
   };
 };
 
-export default useGetPostData;
+export default useGetFollowList;

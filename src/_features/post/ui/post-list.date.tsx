@@ -10,7 +10,7 @@ export default function PostListDate({ createdAt }: Props) {
   const dayOfWeek = date.toLocaleString('ko-KR', { weekday: 'long' }); // "금요일"
 
   return (
-    <ul className='flex items-center pl-2'>
+    <ul className='flex items-center gap-2 pl-2'>
       <li>{year}년</li>
       <li>{month}</li>
       <li>{day}일</li>

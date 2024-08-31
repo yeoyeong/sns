@@ -1,7 +1,7 @@
 'use client';
 
 import Photo from '@/_shared/asset/icon/photo_icon.svg';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { v4 as  uuidv4} from 'uuid';
 import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd';
 import writeStore from '../lib/store/store';
@@ -9,7 +9,10 @@ import { ImageFile } from '../lib/types/write';
 import PhotoDraggableItem from './writeForm.photoDraggableItem';
 import { validateFiles } from '../lib/validate';
 
-export default function InputPhoto() {
+type Props = {
+  picture?:string[]
+}
+export default function InputPhoto({picture}:Props) {
   const { setPicture, deletePicture }= writeStore()
   const [images, setImages] = useState<ImageFile[]>([]);
   
@@ -36,12 +39,22 @@ export default function InputPhoto() {
   }
 
   // 파일 첨부 가공
-  const createImageObjects = (imageLists:File[]) => {
-    return imageLists.map((image) => ({
-      id: uuidv4(),
-      file: image,
-      blob: URL.createObjectURL(image as Blob)
-    }));
+  const createImageObjects = (imageLists: (File | string)[]) => {
+    return imageLists.map((image) => {
+      if (typeof image === 'string') {
+        return {
+          id: uuidv4(),
+          file: image,
+          blob: image
+        };
+      }
+  
+      return {
+        id: uuidv4(),
+        file: image,
+        blob: URL.createObjectURL(image as Blob)
+      };
+    });
   };
   
   // 5장 제한
@@ -81,8 +94,10 @@ export default function InputPhoto() {
   };
 
 
-
-
+  useEffect(()=>{
+    if(!picture) return;
+    setImages(createImageObjects(picture))
+  },[])
   
   return (
     <div className='flex items-center gap-3'>

@@ -7,12 +7,11 @@ import Image from 'next/image';
 import UserIcon from '@/_widget/user/UserIcon';
 import setting_icon from '@/_shared/asset/icon/setting_icon.png';
 import { useUserStore } from '@/_shared/util/userStore';
-import usePostUserFollow from '@/_features/user/model/query/usePostUserFollow';
 import useOutsideClick from '@/_shared/lib/hooks/useOutsideClick';
+import FollowButton from '@/_features/followers/ui/FollowButton';
 import { GetPostType } from '../lib/type/getPostType';
 import PostListComments from './post-list.comments';
 import PostListItem from './post-list.item';
-
 import PostSetting from './post-list.postSetting';
 
 type Props = {
@@ -29,7 +28,6 @@ export default function PostCard({ data }: Props) {
     user_id,
   } = data;
   const { user } = useUserStore();
-  const { followingHandler } = usePostUserFollow();
   const { isOpen, setIsOpen, ref } = useOutsideClick();
 
   return (
@@ -45,17 +43,7 @@ export default function PostCard({ data }: Props) {
         </Link>
         <div className='flex items-center'>
           {user && user.uid !== user_id ? (
-            <button
-              onClick={() =>
-                followingHandler({
-                  followerId: user.uid,
-                  followingId: user_id,
-                })
-              }
-              className='rounded-lg bg-gray-200 px-2 py-1 text-sm font-bold shadow-md'
-              type='button'>
-              팔로우
-            </button>
+            <FollowButton followerId={user.uid} followingId={user_id} />
           ) : (
             <div className='relative' ref={ref}>
               <button

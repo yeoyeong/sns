@@ -13,7 +13,7 @@ export default function PostListCommentsList({ post_id }: Props) {
       <li>로딩중</li>
     </ul>;
   }
-  console.log(comments);
+
   if (isSuccess) {
     return (
       <ul>
