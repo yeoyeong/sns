@@ -1,13 +1,14 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import { UserData } from '@/_features/i/lib/types/user';
 import Image from 'next/image';
 import setting_icon from '@/_shared/asset/icon/setting_icon.png';
 import user_icon from '@/_shared/asset/icon/header-user_icon.png';
 import useOutsideClick from '@/_shared/lib/hooks/useOutsideClick';
 import { useUserStore } from '@/_shared/util/userStore';
+import FollowButton from '@/_features/followers/ui/FollowButton';
 import useGetUserStats from '../model/query/useGetUserStats';
-import usePostUserFollow from '../model/query/usePostUserFollow';
 import UserInfoSetting from './UserInfo.setting';
 import UserInfoPatch from './UserInfo.modal';
 import UserInfoPost from './UserInfo.Post';
@@ -18,11 +19,16 @@ type Props = {
 
 export default function UserInfo({ user }: Props) {
   const { user: myData } = useUserStore();
-
+  const [isUserType, setIsUserType] = useState(false);
   const { data, isLoading } = useGetUserStats({ uid: user.uid });
-
-  const { followingHandler } = usePostUserFollow();
   const { isOpen, setIsOpen, ref } = useOutsideClick();
+
+  useEffect(() => {
+    if (!myData) return;
+    if (myData.uid !== user.uid) setIsUserType(false);
+    else setIsUserType(true);
+  }, [myData]);
+
   const {
     isOpen: isOpenPatch,
     setIsOpen: setIsOpenPatch,
@@ -34,12 +40,7 @@ export default function UserInfo({ user }: Props) {
     setIsOpen(false);
   };
 
-  const isUserType = () => {
-    if (myData?.uid !== user.uid) return false;
-    return true;
-  };
-
-  if (!data || isLoading || !myData) {
+  if (!myData || isLoading) {
     return null;
   }
 
@@ -89,17 +90,7 @@ export default function UserInfo({ user }: Props) {
             </div>
             <div>
               {!isUserType ? (
-                <button
-                  onClick={() =>
-                    followingHandler({
-                      followerId: myData.uid,
-                      followingId: user.uid,
-                    })
-                  }
-                  className='rounded-lg bg-gray-200 px-2 font-semibold shadow-md'
-                  type='button'>
-                  팔로우
-                </button>
+                <FollowButton followerId={myData.uid} followingId={user.uid} />
               ) : (
                 <div className='relative' ref={ref}>
                   <button
@@ -124,13 +115,13 @@ export default function UserInfo({ user }: Props) {
             </li>
             <li>
               <p>
-                <span className='mr-1 font-bold'>팔로우</span>
+                <span className='mr-1 font-bold'>팔로워</span>
                 {isLoading ? 0 : data.followerCount}
               </p>
             </li>
             <li>
               <p>
-                <span className='mr-1 font-bold'>팔로워</span>
+                <span className='mr-1 font-bold'>팔로잉</span>
                 {isLoading ? 0 : data.followingCount}
               </p>
             </li>

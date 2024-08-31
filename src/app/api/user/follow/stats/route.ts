@@ -30,8 +30,9 @@ export async function GET(request: Request) {
     const followingId = searchParams.get('following_id');
 
     if (!followingId) {
+      console.log(followingId, '팔로잉아이디');
       return NextResponse.json(
-        { error: '팔로우할 사용자 ID는 필수 항목입니다.' },
+        { error: 'ID는 필수 항목입니다.' },
         { status: 400 }
       );
     }

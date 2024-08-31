@@ -22,6 +22,7 @@ export default function UserInfoPost({ userId }: Props) {
         {posts &&
           posts.map(post => (
             <Link
+              key={post.id}
               href={`post/${post.id.toString()}`}
               className='group relative aspect-square'>
               <Image

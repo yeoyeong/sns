@@ -10,7 +10,7 @@ type Props = {
 export default function ImageSlider({ slideImages }: Props) {
   const imageStyle: CSSProperties = useMemo(
     () => ({
-      width: '360px',
+      width: '430px',
       height: 'auto',
       objectFit: 'cover',
     }),
@@ -19,7 +19,7 @@ export default function ImageSlider({ slideImages }: Props) {
 
   return (
     <div className='flex items-center justify-center py-1'>
-      <div className='w-[360px] overflow-hidden'>
+      <div className='w-[430px] overflow-hidden'>
         <Swiper
           modules={[Navigation, Pagination]}
           spaceBetween={50}
@@ -32,11 +32,11 @@ export default function ImageSlider({ slideImages }: Props) {
               key={v4()}
               className='flex items-center justify-center bg-gray-100'>
               <Image
-                className='h-64 w-[360px] object-cover'
+                className='h-64 w-[430px] object-cover'
                 style={imageStyle}
                 src={slideImage}
                 alt='포스트사진'
-                width={360}
+                width={430}
                 height={64}
               />
             </SwiperSlide>

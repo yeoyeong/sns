@@ -4,4 +4,4 @@ export type WritingFormData = {
   picture: string[];
 };
 
-export type ImageFile = { id: string; file: File; blob: string };
+export type ImageFile = { id: string; file: File | string; blob: string };

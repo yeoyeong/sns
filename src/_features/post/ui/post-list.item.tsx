@@ -22,7 +22,7 @@ export default function PostListItem({
   return (
     <>
       <Link href={`/post/${postId}`}>
-        <div className='card-grid grid w-[360px] items-center border border-solid border-blue-300'>
+        <div className='card-grid grid w-[430px] items-center border border-solid border-blue-300'>
           <p className='flex h-9 items-center justify-center border-r border-solid border-blue-300'>
             날짜
           </p>
