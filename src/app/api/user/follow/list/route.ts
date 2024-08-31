@@ -6,6 +6,7 @@ interface User {
   uid: string;
   nickname: string;
   profileImg: string;
+  userId: string;
 }
 
 interface ListItem {
@@ -58,7 +59,7 @@ export async function GET(request: Request) {
         .select(
           `
           following_id,
-          users:following_id(uid, nickname, profileImg)
+          users:following_id(uid, nickname, profileImg, userId)
         `
         )
         .eq('follower_id', userId)
@@ -72,7 +73,7 @@ export async function GET(request: Request) {
         .select(
           `
           follower_id,
-          users:follower_id(uid, nickname, profileImg)
+          users:follower_id(uid, nickname, profileImg, userId)
         `
         )
         .eq('following_id', userId)
@@ -111,9 +112,10 @@ export async function GET(request: Request) {
 
         // users가 배열이 아닌 객체일 때만 처리
         return {
-          userId: item.users.uid,
+          user_uid: item.users.uid,
           nickname: item.users.nickname,
           profileImg: item.users.profileImg,
+          userId: item.users.userId,
         };
       })
       .filter(userData => Object.keys(userData).length > 0); // 빈 객체를 필터링
