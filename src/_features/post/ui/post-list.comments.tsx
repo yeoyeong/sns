@@ -23,7 +23,7 @@ export default function PostListComments({
       {!isShowComments ? (
         <button
           type='button'
-          className='text-gray-300'
+          className='text-gray-400'
           onClick={() => setIsShowComments(true)}>
           댓글 {commentsCount}개 모두 보기
         </button>
@@ -31,7 +31,7 @@ export default function PostListComments({
         <>
           <button
             type='button'
-            className='text-gray-300'
+            className='text-gray-400'
             onClick={() => setIsShowComments(false)}>
             댓글 숨기기
           </button>

@@ -129,3 +129,9 @@ table {
 .swiper-button-next:after {
   font-size: 16px; /* 화살표 아이콘 크기 줄이기 */
 }
+
+@layer components {
+  .skeleton {
+    @apply animate-shimmer bg-gradient-custom bg-custom;
+  }
+}

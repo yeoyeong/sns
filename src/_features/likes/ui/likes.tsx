@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useDebouncedCallback } from 'use-debounce';
 import HeartIcon from '@/_shared/asset/icon/heart_icon.svg';
 import usePostLike from '../model/query/usePostLike';
 import usePostLikeStats from '../model/query/usePostLikeStats';
@@ -13,7 +14,7 @@ export default function Likes({ post_id, likesCount }: Props) {
   const [count, setCount] = useState(likesCount);
   const { data: isLike, isLoading } = usePostLikeStats({ post_id });
 
-  const likeHandler = async (payload: LikePayload) => {
+  const likeHandler = useDebouncedCallback(async (payload: LikePayload) => {
     if (!payload.post_id) return;
     try {
       const { state } = await mutation.mutateAsync(payload);
@@ -22,7 +23,7 @@ export default function Likes({ post_id, likesCount }: Props) {
     } catch (error) {
       console.log(error);
     }
-  };
+  }, 300); // 300ms 디바운스 적용
 
   if (isLoading) {
     return (
@@ -34,7 +35,10 @@ export default function Likes({ post_id, likesCount }: Props) {
 
   return (
     <div className='group relative'>
-      <button type='button' onClick={() => likeHandler({ post_id })}>
+      <button
+        type='button'
+        aria-label='likes_button'
+        onClick={() => likeHandler({ post_id })}>
         {!isLike ? (
           <HeartIcon fill='none' stroke='#848484' />
         ) : (

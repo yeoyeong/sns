@@ -42,7 +42,7 @@ export function CommentsInput({
 
   return (
     <input
-      className='mt-1 w-full py-2'
+      className='mt-1 w-full py-2 pl-2'
       ref={ref}
       type='text'
       name='comment'

@@ -13,6 +13,7 @@ import UserInfoSetting from './UserInfo.setting';
 import UserInfoPatch from './UserInfo.modal';
 import UserInfoPost from './UserInfo.Post';
 import UserInfoFollow from './UserInfo.follow';
+import UserInfoSkeleton from './UserInfo.skeleton';
 
 type Props = {
   user: UserData;
@@ -42,9 +43,8 @@ export default function UserInfo({ user }: Props) {
   };
 
   if (!myData || isLoading) {
-    return null;
+    return <UserInfoSkeleton />;
   }
-
   return (
     <div>
       <div className='flex justify-center gap-10 pt-16'>

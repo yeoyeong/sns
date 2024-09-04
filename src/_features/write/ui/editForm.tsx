@@ -9,6 +9,7 @@ import useUpload from '../lib/hooks/useUpload';
 import { WritingFormData } from '../lib/types/write';
 import writeStore from '../lib/store/store';
 import usePatchPost from '../model/query/usePatchPost';
+import EditFormSkeleton from './editFormSkeleton';
 
 
 export default function EditForm() {
@@ -27,7 +28,7 @@ export default function EditForm() {
     const { onSubmit } = useUpload();
 
     if(isLoading) {
-      return <div>로딩중. . .</div>
+      return <EditFormSkeleton/>
     }
 
     return (

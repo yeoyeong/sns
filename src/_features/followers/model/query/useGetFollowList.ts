@@ -9,7 +9,12 @@ type Props = {
   type: string;
 };
 // type = following, follower
-const useGetFollowList = ({ limit = 2, type = 'following', userId }: Props) => {
+const useGetFollowList = ({
+  queryKey,
+  limit = 2,
+  type = 'following',
+  userId,
+}: Props) => {
   const {
     data,
     isLoading,
@@ -19,7 +24,7 @@ const useGetFollowList = ({ limit = 2, type = 'following', userId }: Props) => {
     fetchNextPage,
     hasNextPage,
   } = useInfiniteQuery({
-    queryKey: ['post_follow', userId],
+    queryKey: [queryKey],
     queryFn: ({ pageParam = 1 }) =>
       getFollowListApi({ pageParam, limit, userId, type }),
     getNextPageParam: (lastPage, allPages) => {
@@ -35,6 +40,7 @@ const useGetFollowList = ({ limit = 2, type = 'following', userId }: Props) => {
       fetchNextPage();
     }
   });
+  console.log(data);
   const flattenedData = isSuccess ? data.pages.flatMap(page => page.data) : [];
 
   return {
