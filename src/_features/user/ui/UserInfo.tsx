@@ -8,6 +8,7 @@ import user_icon from '@/_shared/asset/icon/header-user_icon.png';
 import useOutsideClick from '@/_shared/lib/hooks/useOutsideClick';
 import { useUserStore } from '@/_shared/util/userStore';
 import FollowButton from '@/_features/followers/ui/FollowButton';
+import OpenChatLinkProvider from '@/_features/chat/ui/OpenChatLinkProvider';
 import useGetUserStats from '../model/query/useGetUserStats';
 import UserInfoSetting from './UserInfo.setting';
 import UserInfoPatch from './UserInfo.modal';
@@ -74,11 +75,11 @@ export default function UserInfo({ user }: Props) {
             )}
           </div>
           {!isUserType && (
-            <button
-              type='button'
-              className='bg-blue-default text-white-100 rounded-full px-4 py-1'>
-              메세지 보내기
-            </button>
+            <OpenChatLinkProvider uid_1={myData.uid} uid_2={user.uid}>
+              <div className='bg-blue-default text-white-100 rounded-full px-4 py-1'>
+                메세지 보내기
+              </div>
+            </OpenChatLinkProvider>
           )}
         </div>
         <div className='flex flex-col gap-8'>

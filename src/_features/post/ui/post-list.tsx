@@ -7,6 +7,7 @@ import { useGetPostData } from '@/_shared/model';
 import { Header } from '@/_widget';
 import logo from '@/_shared/asset/logo/logo.png';
 import PostCard from './post-list.card';
+// import PostCard from './post-list.card';
 
 export default function PostList() {
   const { data: posts, isSuccess, isLoading, fetchMore } = useGetPostData();

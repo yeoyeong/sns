@@ -9,6 +9,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontSize: {
+        xxs: '0.425rem', // 10px 크기 추가
+      },
       colors: {
         blue: {
           default: '#0057FF', // blue-main color
