@@ -10,7 +10,7 @@ const useGoogleLogin = (): UseGoogleLoginResult => {
     await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: 'http://localhost:3000',
+        redirectTo: 'https://yeoyeong-sns.vercel.app/',
       },
     });
   };

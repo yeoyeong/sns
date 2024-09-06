@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import { isEqual } from 'lodash';
 import message_icon from '@/_shared/asset/icon/message_icon.png';
 import Likes from '@/_features/likes/ui/likes';
 import Image from 'next/image';
@@ -88,8 +89,9 @@ function PostCard({ data, length }: Props) {
   );
 }
 
-// export default PostCard;
-
 export default React.memo(PostCard, (prevProps, nextProps) => {
-  return prevProps.length === nextProps.length;
+  return (
+    prevProps.length === nextProps.length &&
+    isEqual(prevProps.data, nextProps.data)
+  );
 });
