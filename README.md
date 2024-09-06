@@ -119,8 +119,10 @@
 
 - 🔗 <a href="https://github.com/yeoyeong/yeoyeong-sns/wiki/%F0%9F%A7%BE-React-Query-%EC%BA%90%EC%8B%B1-%EC%9D%B4%EC%8A%88-%ED%95%B4%EA%B2%B0">🧾 단계별 렌더링 방식 수정
 </a>
+
 - 🔗 <a href="https://github.com/yeoyeong/yeoyeong-sns/wiki/%F0%9F%A7%BE-%EC%8B%A4%EC%8B%9C%EA%B0%84-UI-%EB%B0%98%EC%98%81%EC%9D%84-%EC%9C%84%ED%95%9C-useMutation-%EB%A6%AC%ED%8C%A9%ED%86%A0%EB%A7%81">🧾 실시간 UI 반영을 위한 useMutation 리팩토링
 </a>
+
 - 🔗 <a href="https://github.com/yeoyeong/yeoyeong-sns/wiki/%F0%9F%A7%BE-%EC%A2%8B%EC%95%84%EC%9A%94-%EC%9A%94%EC%B2%AD-%EC%B5%9C%EC%A0%81%ED%99%94-%3A-debounce-%EC%A0%81%EC%9A%A9">🧾 좋아요 요청 최적화 : debounce 적용
 </a>
 
