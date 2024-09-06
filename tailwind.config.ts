@@ -9,6 +9,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontSize: {
+        xxs: '0.425rem', // 10px 크기 추가
+      },
       colors: {
         blue: {
           default: '#0057FF', // blue-main color
@@ -39,6 +42,22 @@ const config: Config = {
           200: '#E5E7EB', // gray-200 color
           100: '#F3F4F6', // gray-100 color
         },
+      },
+      animation: {
+        shimmer: 'shimmer 1.5s infinite linear',
+      },
+      keyframes: {
+        shimmer: {
+          '0%': { backgroundPosition: '200%' },
+          '100%': { backgroundPosition: '-200%' },
+        },
+      },
+      backgroundImage: {
+        'gradient-custom':
+          'linear-gradient(to right, #D9D9D9 0%, #EDEEF1 50%, #D9D9D9 100%)',
+      },
+      backgroundSize: {
+        custom: '300% 100%',
       },
     },
   },

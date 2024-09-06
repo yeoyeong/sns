@@ -99,6 +99,12 @@ export default function InputPhoto({picture}:Props) {
     setImages(createImageObjects(picture))
   },[])
   
+  useEffect(()=>{
+    return ()=>{
+      setPicture([])
+    }
+  },[])
+
   return (
     <div className='flex items-center gap-3'>
       <div className='flex items-center justify-center w-14 aspect-square rounded-2xl border border-solid border-gray-500'>

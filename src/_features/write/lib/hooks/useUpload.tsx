@@ -1,7 +1,10 @@
 import { uploadImg } from '../../model/api/uploadImageApi';
 import { WritingFormData } from '../types/write';
 
-export default function useUpload() {
+type Props = {
+  storageName?: string;
+};
+export default function useUpload({ storageName = 'post_img' }: Props = {}) {
   const uploadImgGetUrl = async ({
     picture,
   }: {
@@ -10,7 +13,7 @@ export default function useUpload() {
     const uploadPromises = picture.map(async (el: File | string) => {
       try {
         if (typeof el === 'string') return el;
-        const result = await uploadImg(el, 'post_img');
+        const result = await uploadImg(el, storageName);
         if (result === null) return null;
         return result;
       } catch (err) {
@@ -37,5 +40,6 @@ export default function useUpload() {
 
   return {
     onSubmit,
+    uploadImgGetUrl,
   };
 }
