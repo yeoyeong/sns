@@ -30,7 +30,7 @@ export async function GET(req: Request) {
   
   // roomId가 있을 경우 해당 방의 읽지 않은 메시지만 조회
   if (roomId) {
-    let query = supabase
+    const query = supabase
         .from('messages')
         .select('id')
         .eq('is_read', false)
@@ -45,7 +45,7 @@ export async function GET(req: Request) {
 
     // 룸이 없을 경우
     // Step 1: 사용자가 속한 방 목록(room_id)을 가져옴
-    let roomQuery = supabase
+    const roomQuery = supabase
         .from('rooms')
         .select('id')
         .contains('participants', [user.id]); // participants 배열에 사용자가 포함된 방을 조회
@@ -63,7 +63,7 @@ export async function GET(req: Request) {
 
     
     // Step 2: 읽지 않은 메시지를 해당 방(roomIds)에서 조회
-    let query = supabase
+    const query = supabase
         .from('messages')
         .select('id')
         .eq('is_read', false)

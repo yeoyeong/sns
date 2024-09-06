@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import default_img from '@/_shared/asset/post_default_image.webp';
 import HeartIcon from '@/_shared/asset/icon/heart_icon.svg';
+import UserInfoPostSkeleton from './UserInfo.PostSkeleton';
 
 type Props = {
   userId: string;
@@ -15,7 +16,7 @@ export default function UserInfoPost({ userId }: Props) {
     ref,
   } = useGetPostData({ userId, queryKey: 'user_post', limit: 6 });
 
-  if (isLoading) return <div>로딩중</div>;
+  if (isLoading) return <UserInfoPostSkeleton />;
   if (isSuccess) {
     return (
       <div className='mx-auto mt-10 grid w-1/2 gap-2 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3'>

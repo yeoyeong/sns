@@ -33,10 +33,13 @@ const useGetPostData = ({
 
   const ref = useIntersect(async (entry, observer) => {
     observer.unobserve(entry.target); // 옵저버 제거 더 이상 해당 오브젝트 관찰 x
+  });
+
+  const fetchMore = () => {
     if (hasNextPage && !isFetching) {
       fetchNextPage();
     }
-  });
+  };
   const flattenedData = isSuccess ? data.pages.flatMap(page => page.data) : [];
 
   return {
@@ -45,6 +48,7 @@ const useGetPostData = ({
     isError,
     isSuccess,
     ref,
+    fetchMore,
   };
 };
 

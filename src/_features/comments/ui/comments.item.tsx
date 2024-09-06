@@ -23,7 +23,7 @@ export default function CommentsItem({ comment, post_id, isReplay = false }: Pro
   const [isEditMode, setIsEditMode] = useState<number|undefined>();
   
   return (
-    <li className='flex flex-col w-[360px] ' key={comment.id}>
+    <li className='flex flex-col w-[430px] ' key={comment.id}>
         <div className='flex justify-between items-center'>
         <Link href={`/${comment.users.userId}`} className='flex items-center gap-1'>
             <div className='block h-[14px] w-[14px] overflow-hidden rounded-full'>

@@ -5,7 +5,7 @@ import { useChatStore } from '@/_features/chat/model/store';
 import { UserData } from '@/_features/i/lib/types/user';
 import supabase from '@/_shared/util/supabase/client';
 import { useUserStore } from '@/_shared/util/userStore';
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 
 interface ClientWrapperProps {
   user: UserData | null;
@@ -16,10 +16,11 @@ function ClientWrapper({ user, children }: ClientWrapperProps) {
   const { setUser } = useUserStore();
   const { setUnreadCount } = useChatStore();
 
-  const unreadCount = async () => {
+  const unreadCountHandler = useCallback(async () => {
     const data = await fetchUnreadCount(); // 업데이트 후 다시 계산
     setUnreadCount(data.unreadCount);
-  };
+  }, []); // 빈 배열로 설정하여 한 번만 생성되도록 메모이제이션
+
   useEffect(() => {
     if (!user) return;
     const subscribeToMessages = () => {
@@ -38,7 +39,7 @@ function ClientWrapper({ user, children }: ClientWrapperProps) {
             // 현재 사용자의 uid와 새로 추가된 메시지의 user_uid 비교
             if (newMessage.user_uid !== user.uid) {
               alert(`새로운 메시지가 도착했습니다: ${newMessage.content}`);
-              unreadCount();
+              unreadCountHandler();
             }
           }
         )
@@ -49,9 +50,9 @@ function ClientWrapper({ user, children }: ClientWrapperProps) {
         supabase.removeChannel(channel);
       };
     };
-    unreadCount();
+    unreadCountHandler();
     subscribeToMessages();
-  }, [user]); // user가 업데이트되면 구독을 다시 설정
+  }, [user, unreadCountHandler]); // user가 업데이트되면 구독을 다시 설정
 
   useEffect(() => {
     if (!user) return;

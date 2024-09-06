@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import Image from 'next/image';
 import { useParams, useSearchParams } from 'next/navigation';
 import supabase from '@/_shared/util/supabase/client';
 import { useUserStore } from '@/_shared/util/userStore';
@@ -16,22 +15,19 @@ import useSendMessage from '../model/query/useSendMessage';
 import ChatTargetMessage from './Chat.targetMessage';
 import ChatMyMessage from './Chat.myMessage';
 
-
-
-
 export default function Chat() {
   const { roomId } = useParams();
   const roomIdStr = Array.isArray(roomId) ? roomId[0] : roomId;
   const searchParams = useSearchParams();
   const uid_1 = searchParams.get('uid_1');
   const uid_2 = searchParams.get('uid_2');
-
+  // prettier-ignore
   const [newMessage, setNewMessage] = useState<string>('');
   const [inputPhotoReFetch, setInputPhotoReFetch] = useState(0);
+  // prettier-ignore
   const scrollRef = useRef<HTMLDivElement>(null);
-  const [image, setImage] = useState<File | null>();
-  const { picture, setPicture }= writeStore()
-  const { uploadImgGetUrl } = useUpload({storageName:'chat_img'})
+  const { picture, setPicture } = writeStore();
+  const { uploadImgGetUrl } = useUpload({ storageName: 'chat_img' });
   const { user } = useUserStore();
 
   const {
@@ -39,8 +35,7 @@ export default function Chat() {
     isLoading,
     refetch: refetchMessages,
   } = useFetchMessages({ roomId: roomIdStr });
-  const { mutateAsync }= useSendMessage();
-
+  const { mutateAsync } = useSendMessage();
 
   // 구독 및 메시지 패칭을 연동
   useEffect(() => {
@@ -119,7 +114,6 @@ export default function Chat() {
     markMessagesAsRead();
   }, [messages, roomId]);
 
-
   // 방 존재 여부 확인
   useEffect(() => {
     const checkAndCreateRoom = async () => {
@@ -128,7 +122,7 @@ export default function Chat() {
         const data = await checkRoomExists(roomIdStr);
         // 방이 존재하지 않는다면 새로운 방 생성
         if (!data.exists) {
-          await createRoom({roomId: roomIdStr,uid_1,uid_2,});
+          await createRoom({ roomId: roomIdStr, uid_1, uid_2 });
         } else {
           refetchMessages();
         }
@@ -148,15 +142,15 @@ export default function Chat() {
       pictures = await uploadImgGetUrl({ picture });
       const response = await mutateAsync({
         content: newMessage,
-        imageUrl:pictures,
+        imageUrl: pictures,
         userUId: user.uid,
-        roomId:roomIdStr,
-      })
+        roomId: roomIdStr,
+      });
       if (response.ok) {
         refetchMessages();
         setNewMessage('');
         setPicture([]);
-        setInputPhotoReFetch((prev)=>prev===1? prev-1 : prev+1)
+        setInputPhotoReFetch(prev => (prev === 1 ? prev - 1 : prev + 1));
       }
     } catch (error) {
       console.error(error);
@@ -169,20 +163,22 @@ export default function Chat() {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
   }, [messages]); // messages가 변경될 때마다 실행
-  
-  if(isLoading || !user) return <div>로딩중</div>
-  
+
+  if (isLoading || !user) return <div>로딩중</div>;
+
   return (
     <div>
       <div className='h-[400px] overflow-y-scroll px-5' ref={scrollRef}>
-        {messages.map((message:Message) => (
-          message.user_uid === user.uid ?
-            <ChatMyMessage message={message}/>
-            :<ChatTargetMessage message={message}/>
-        ))}
+        {messages.map((message: Message) =>
+          message.user_uid === user.uid ? (
+            <ChatMyMessage message={message} />
+          ) : (
+            <ChatTargetMessage message={message} />
+          )
+        )}
       </div>
       <div>
-        <div className='flex px-4 mt-2 gap-2'>
+        <div className='mt-2 flex gap-2 px-4'>
           <input
             type='text'
             className='w-full'
@@ -190,12 +186,15 @@ export default function Chat() {
             onChange={e => setNewMessage(e.target.value)}
             placeholder='메세지를 입력해주세요 ...'
           />
-          <button type='button' className='bg-blue-default text-white-100 rounded-lg px-2' onClick={handleMessageSend}>
+          <button
+            type='button'
+            className='bg-blue-default text-white-100 rounded-lg px-2'
+            onClick={handleMessageSend}>
             Send
           </button>
         </div>
-        <div className='px-2 mt-2'>
-            <InputPhoto key={inputPhotoReFetch} />
+        <div className='mt-2 px-2'>
+          <InputPhoto key={inputPhotoReFetch} />
         </div>
       </div>
     </div>

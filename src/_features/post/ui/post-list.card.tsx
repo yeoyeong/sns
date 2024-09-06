@@ -9,13 +9,12 @@ import UserIcon from '@/_widget/user/UserIcon';
 import setting_icon from '@/_shared/asset/icon/setting_icon.png';
 import { useUserStore } from '@/_shared/util/userStore';
 import useOutsideClick from '@/_shared/lib/hooks/useOutsideClick';
+import OpenChatLinkProvider from '@/_features/chat/ui/OpenChatLinkProvider';
 import FollowButton from '@/_features/followers/ui/FollowButton';
-import { generateRoomId } from '@/_shared/lib/generateRoomId';
 import { GetPostType } from '../lib/type/getPostType';
 import PostListComments from './post-list.comments';
 import PostListItem from './post-list.item';
 import PostSetting from './post-list.postSetting';
-import OpenChatLinkProvider from '@/_features/chat/ui/OpenChatLinkProvider';
 
 type Props = {
   data: GetPostType;
@@ -84,11 +83,13 @@ function PostCard({ data, length }: Props) {
           commentsCount={data.commentsCount}
         />
       </div>
+      <div className='hidden'>{length}</div>
     </div>
   );
 }
 
-export default PostCard;
-// export default React.memo(PostCard, (prevProps, nextProps) => {
-//   return prevProps.length === nextProps.length;
-// });
+// export default PostCard;
+
+export default React.memo(PostCard, (prevProps, nextProps) => {
+  return prevProps.length === nextProps.length;
+});

@@ -7,6 +7,7 @@ import BackButton from "@/_shared/ui/button/BackButton";
 import { useUserStore } from "@/_shared/util/userStore";
 import useGetFollowList from "../model/query/useGetFollowList";
 import FollowButton from "./FollowButton";
+import FollowListSkeleton from "./FollowListSkeleton";
 
 
 
@@ -18,15 +19,11 @@ type Props ={
   setIsOpen:React.Dispatch<SetStateAction<boolean>>;
 }
 export default function FollowList({userId, type, setIsOpen}:Props) {
-  const {data, isLoading} = useGetFollowList({userId,type, limit:10})
+  const {data, isLoading} = useGetFollowList({queryKey:`${type}, ${userId}`, userId, type, limit:10})
   const {user:myData}= useUserStore()
   if(!myData || isLoading) {
     return (
-    <div className='bg-white-custom left-0 fixed top-0 z-20 flex h-screen w-full justify-center pt-20'>
-      <div className='bg-white-100 flex h-[600px] w-[420px] flex-col shadow-md'>
-        로딩중 . . .
-      </div>
-    </div>
+    <FollowListSkeleton />
     )}
   return (
   <div className='fixed top-1/2 left-1/2 bg-white-100 flex h-[600px] w-[420px] flex-col shadow-md z-20 -translate-x-1/2 -translate-y-1/2'>
