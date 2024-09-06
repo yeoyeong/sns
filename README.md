@@ -154,7 +154,7 @@
 
 | 채팅기능 |
 |----------|
-| ![chat](https://github.com/user-attachments/assets/e8c3c82a-44b9-433f-b0be-3dc3982a9c20) |
+| ![chattt](https://github.com/user-attachments/assets/0952566c-81f7-4dfd-b61f-ef4cf10a26ec) |
   
 ## 프로젝트 소개
 > 개인 프로젝트이며 **1명** 으로 구성되어 있어요
