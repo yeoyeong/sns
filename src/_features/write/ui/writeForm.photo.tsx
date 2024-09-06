@@ -97,7 +97,8 @@ export default function InputPhoto({picture}:Props) {
   useEffect(()=>{
     if(!picture) return;
     setImages(createImageObjects(picture))
-  },[])
+    setPicture(picture)
+  },[picture])
   
   useEffect(()=>{
     return ()=>{
