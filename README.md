@@ -15,7 +15,6 @@
   <tr>
     <td align="center"><b>frontend</b></td>
     <td>
-      
       <img src="https://img.shields.io/badge/React-%2320232a.svg?style=flat&logo=React&logoColor=%2361DAFB" />
       <img src="https://img.shields.io/badge/React%20Query-FF4154?style=flat&logo=react%20query&logoColor=white" />
       <img src="https://img.shields.io/badge/Zustand-000000?style=flat&logo=zustand&logoColor=white" />
