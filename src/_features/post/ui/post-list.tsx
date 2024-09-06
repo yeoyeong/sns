@@ -10,7 +10,8 @@ export default function PostList() {
   if (isSuccess) {
     return (
       <div className='mt-4'>
-        {data && data.map(el => <PostCard data={el} key={el?.id} />)}
+        {Array.isArray(data) &&
+          data.map(el => <PostCard data={el} key={el?.id} />)}
         <div ref={ref} className='h-[1px]' />
       </div>
     );

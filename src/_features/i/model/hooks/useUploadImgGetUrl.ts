@@ -1,10 +1,7 @@
 import supabase from '@/_shared/util/supabase/client';
 
 const useUploadImgGetUrl = () => {
-  const getProfileImgURL = (
-    BUCKETNAME: string,
-    filePath: string
-  ): string | null => {
+  const getImgURL = (BUCKETNAME: string, filePath: string): string | null => {
     const { data } = supabase.storage
       .from(BUCKETNAME) // 여기에 실제 버킷 이름을 입력합니다.
       .getPublicUrl(filePath);
@@ -38,7 +35,7 @@ const useUploadImgGetUrl = () => {
       // alert('Error uploading file:', uploadError.message);
       return null;
     }
-    const publicUrl = getProfileImgURL(BUCKETNAME, filePath);
+    const publicUrl = getImgURL(BUCKETNAME, filePath);
     if (typeof publicUrl === 'string') return publicUrl;
     return null;
   };

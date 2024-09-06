@@ -17,6 +17,13 @@ export default function Header() {
       </header>
     );
 
+  if (pathname.startsWith('chat'))
+    return (
+      <header className='flex justify-center'>
+        <HeaderMain user={user} />
+      </header>
+    );
+
   if (pathname !== '') return null;
 
   return (
