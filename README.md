@@ -24,7 +24,13 @@
 
 > ## 서비스 개요
 👉 나만의 일기를 다른 사람과 공유하는 서비스입니다. <br/>
-👉 서비스 -  https://yeoyeong-sns.vercel.app/
+👉 서비스 -  https://yeoyeong-sns.vercel.app/ <br/>
+
+| 테스트 계정   |  |
+|--------|------|
+| ID   | PW |
+| `test@test.com` | `zxasqwQW12!@`   |
+
 
 <br/>
 
