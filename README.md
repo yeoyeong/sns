@@ -83,14 +83,10 @@
   </tr>
 </table>
 
+
 <p>
     🔗 <a href="https://github.com/yeoyeong/yeoyeong-sns/wiki/%F0%9F%A7%BE-%EA%B8%B0%EC%88%A0-%EC%84%A0%ED%83%9D-%EC%9D%B4%EC%9C%A0">기술 선택 이유</a>
 </p>
-
-<br/>
-
-> ## ERD
-![erd](https://github.com/user-attachments/assets/721ef75b-b986-4617-90e6-f26fc8f9c0cc)
 
 <br/>
 
@@ -101,10 +97,18 @@
 
 <br/>
 
+> ## ERD
+![erd](https://github.com/user-attachments/assets/721ef75b-b986-4617-90e6-f26fc8f9c0cc)
+
+<br/>
+
+
+
 ### 📝 기술적인 도전
 <div markdown="1">
 
   - 🔗 <a href="https://github.com/yeoyeong/yeoyeong-sns/wiki/%F0%9F%A7%BE%EC%9D%B4%EB%AF%B8%EC%A7%80-Lazy-Loading-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0">🧾이미지 Lazy Loading 구현하기</a>
+  - 🔗 <a href="https://github.com/yeoyeong/yeoyeong-sns/wiki/%F0%9F%A7%BEReact-Hook-Form%EC%9D%84-%ED%99%9C%EC%9A%A9%ED%95%9C-%EC%9E%AC%EC%82%AC%EC%9A%A9-%EA%B0%80%EB%8A%A5%ED%95%9C-%EC%9E%85%EB%A0%A5-%ED%95%84%EB%93%9C-%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8-%EA%B5%AC%ED%98%84-%EB%B0%8F-%EC%9C%A0%ED%9A%A8%EC%84%B1-%EA%B2%80%EC%82%AC-%EC%B5%9C%EC%A0%81%ED%99%94">🧾React Hook Form을 활용한 입력 필드 컴포넌트 구현 및 유효성 검사 최적화</a>
   
 </div>
 
@@ -138,29 +142,22 @@
 <br />
 
 ## 기능 소개
-| 로그인 | 회원가입 |
-|----------|----------|
-| ![login](https://github.com/user-attachments/assets/d2e62418-8804-4928-8696-5393e7834747) | ![signup](https://github.com/user-attachments/assets/c2fb3dba-34ea-4021-8467-e0c444280eaf) |
+| 로그인 | 회원가입 | 홈 |
+|----------|----------|----------|
+| ![login](https://github.com/user-attachments/assets/d2e62418-8804-4928-8696-5393e7834747) | ![signup](https://github.com/user-attachments/assets/c2fb3dba-34ea-4021-8467-e0c444280eaf) | ![home](https://github.com/user-attachments/assets/fc4ecb63-72e2-4bbd-b63b-c7d46aa90c10) |
 
-| 홈 | 게시글 생성 |
-|----------|----------|
-| ![home](https://github.com/user-attachments/assets/fc4ecb63-72e2-4bbd-b63b-c7d46aa90c10) | ![create](https://github.com/user-attachments/assets/2dbf5744-f468-4fcf-9a1f-5d2a2dc1982b) |
+| 게시글 생성 | 게시글 수정 / 삭제 | 게시글 좋아요 |
+|----------|----------|----------|
+|  ![create](https://github.com/user-attachments/assets/2dbf5744-f468-4fcf-9a1f-5d2a2dc1982b) | ![fatchDelete](https://github.com/user-attachments/assets/737afcd6-caa1-4b71-b0d2-2ae7ca076891) | ![like](https://github.com/user-attachments/assets/90dced91-3bff-4ad2-ab2e-a9662f4e8774) |
 
-| 게시글 수정 / 삭제 | 게시글 좋아요 |
-|----------|----------|
-| ![fatchDelete](https://github.com/user-attachments/assets/737afcd6-caa1-4b71-b0d2-2ae7ca076891) | ![like](https://github.com/user-attachments/assets/90dced91-3bff-4ad2-ab2e-a9662f4e8774) |
+| 팔로우 / 팔로워 목록 | 유저정보 수정 | 댓글/답글 |
+|----------|----------|----------|
+|  ![followList](https://github.com/user-attachments/assets/23758bc1-3523-4d34-95ad-5344dee0e8d1) | ![userFatch](https://github.com/user-attachments/assets/3eefb4d6-1e34-4911-85d4-772f73e8b00c) | ![comment](https://github.com/user-attachments/assets/6b7e0890-3a4a-4714-ad14-fa1f7d3c9df9) |
 
-| 팔로우 팔로워 목록 | 유저정보 수정 |
-|----------|----------|
-| ![followList](https://github.com/user-attachments/assets/23758bc1-3523-4d34-95ad-5344dee0e8d1) | ![userFatch](https://github.com/user-attachments/assets/3eefb4d6-1e34-4911-85d4-772f73e8b00c) |
+| 팔로잉 | 채팅 기능 | |
+|----------|----------|----------|
+|  ![follow](https://github.com/user-attachments/assets/b5efbf68-7fe5-4c39-aa91-9e168bd5a919) | ![chattt](https://github.com/user-attachments/assets/0952566c-81f7-4dfd-b61f-ef4cf10a26ec) |
 
-| 댓글/답글 | 팔로잉 |
-|----------|----------|
-| ![comment](https://github.com/user-attachments/assets/6b7e0890-3a4a-4714-ad14-fa1f7d3c9df9) | ![follow](https://github.com/user-attachments/assets/b5efbf68-7fe5-4c39-aa91-9e168bd5a919) |
-
-| 채팅기능 |
-|----------|
-| ![chattt](https://github.com/user-attachments/assets/0952566c-81f7-4dfd-b61f-ef4cf10a26ec) |
   
 ## 프로젝트 소개
 > 개인 프로젝트이며 **1명** 으로 구성되어 있어요
