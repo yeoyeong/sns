@@ -14,7 +14,7 @@ function ImageLoader({ src, alt, width, height }: Props) {
   const imageStyle: CSSProperties = useMemo(
     () => ({
       width: '430px',
-      height: 'auto',
+      height: '256px',
       objectFit: 'cover',
     }),
     []
@@ -29,7 +29,9 @@ function ImageLoader({ src, alt, width, height }: Props) {
           width={width}
           height={height}
           // placeholder='blur'
-          // blurDataURL='/path-to-low-res-image.jpg' // optional: placeholder 이미지
+          // blurDataURL='undefined' // optional: placeholder 이미지
+          layout='responsive'
+          loading='lazy'
           className='h-64 w-[430px] object-cover'
           style={imageStyle}
         />

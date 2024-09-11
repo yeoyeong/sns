@@ -31,6 +31,7 @@
     "react-virtualized": "^9.22.5",
     "react-virtuoso": "^4.10.2",
     "react-window": "^1.8.10",
+    "sharp": "^0.33.5",
     "swiper": "^11.1.10",
     "use-debounce": "^10.0.3",
     "uuid": "^10.0.0",

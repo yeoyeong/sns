@@ -1,11 +1,18 @@
 import { createClient } from '@/_shared/util/supabase/server';
 import { NextRequest } from 'next/server';
 
-export const uploadImgGetUrlServer = async (
-  request: NextRequest,
-  image: File,
-  BUCKETNAME: string
-): Promise<string | null> => {
+type Params = {
+  request: NextRequest;
+  image: File | Buffer;
+  imageName: string;
+  BUCKETNAME: string;
+};
+export const uploadImgGetUrlServer = async ({
+  request,
+  image,
+  imageName,
+  BUCKETNAME,
+}: Params): Promise<string | null> => {
   // Supabase 클라이언트 생성
   const supabase = createClient();
 
@@ -32,7 +39,7 @@ export const uploadImgGetUrlServer = async (
   }
 
   // 파일 이름 생성 및 경로 설정
-  const fileExt = image.name.split('.').pop();
+  const fileExt = imageName.split('.').pop();
   const fileName = `${Math.random()}.${fileExt}`;
   const filePath = `${fileName}`;
 
@@ -42,6 +49,7 @@ export const uploadImgGetUrlServer = async (
     .upload(filePath, image, {
       cacheControl: '3600',
       upsert: true, // 필요에 따라 조정
+      contentType: 'image/webp', // 업로드할 파일의 MIME 타입을 설정
     });
 
   if (uploadError) {

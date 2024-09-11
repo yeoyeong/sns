@@ -1,6 +1,3 @@
-
-
-
 export default function ImageSliderSkeleton() {
   return (
     <div className='flex items-center justify-center py-1'>

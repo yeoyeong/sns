@@ -28,7 +28,8 @@ export default function UserInfoPost({ userId }: Props) {
               className='group relative aspect-square'>
               <Image
                 src={post.picture.length !== 0 ? post.picture[0] : default_img}
-                layout='fill'
+                loading='lazy'
+                fill
                 objectFit='cover'
                 alt={`${post.users.nickname}님의 포스트 사진`}
               />

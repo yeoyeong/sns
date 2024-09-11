@@ -1,12 +1,13 @@
 'use client';
 
 import { Virtuoso } from 'react-virtuoso';
-import Image from 'next/image';
 import { useCallback } from 'react';
 import { useGetPostData } from '@/_shared/model';
 import { Header } from '@/_widget';
-import logo from '@/_shared/asset/logo/logo.png';
+import HeaderSkeleton from '@/_widget/header/HeaderSkeleton';
 import PostCard from './post-list.card';
+import PostCardSkeleton from './post-list.cardSkeleton';
+
 // import PostCard from './post-list.card';
 
 export default function PostList() {
@@ -31,8 +32,15 @@ export default function PostList() {
 
   if (isLoading)
     return (
-      <div>
-        <Image src={logo} alt='사이트 로고' width={126} height={29} />
+      <div
+        style={{
+          height: '100%',
+          width: '100%',
+          overflowY: 'auto',
+        }}>
+        <HeaderSkeleton />
+        <PostCardSkeleton />
+        <PostCardSkeleton />
       </div>
     );
   if (isSuccess) {

@@ -2,14 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
-  font-family: 'Se-hwa';
-  src: url('/font/Se-hwa.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-
-
 * {
   box-sizing: border-box;
   padding: 0;
@@ -47,7 +39,6 @@ mark, audio, video {
   padding: 0;
   border: 0;
   font-size: 1.2rem;
-  font-family: "Se-hwa", sans-serif , Arial;
   vertical-align: baseline;
 }
 
@@ -86,26 +77,10 @@ button {
   font-size: inherit;
 }
 
-/* HTML에서 <blockquote> 태그는 긴 인용문을 나타낼 때 사용됩니다.
-    <blockquote> 태그로 묶인 텍스트는 일반적으로 들여쓰기가 적용되어 본문과 구분됨 */
-blockquote,
-q {
-  quotes: none;
-}
-
-blockquote:before,
-blockquote:after,
-q:before,
-q:after {
-  content: "";
-  content: none;
-}
-
 table {
   border-collapse: collapse;
   border-spacing: 0;
 }
-
 
 
 @layer utilities {
@@ -123,7 +98,6 @@ table {
 .bg-black-custom {
   background-color: rgba(0, 0, 0, 0.5);
 }
-
 
 .swiper-button-prev:after,
 .swiper-button-next:after {

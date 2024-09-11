@@ -22,7 +22,7 @@ export default function HeaderMain({ user }: Props) {
     <div className='flex w-[430px] flex-col items-center justify-center gap-4 border-b border-solid border-gray-200 py-10'>
       <div>
         <Link href='/'>
-          <Image src={logo} alt='사이트 로고' width={126} height={29} />
+          <Image src={logo} alt='사이트 로고' width={126} height={29} loading='eager' />
         </Link>
       </div>
       <nav className='flex w-full items-center justify-end'>
