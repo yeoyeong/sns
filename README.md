@@ -124,8 +124,11 @@
 </div>
 
 
-### 📝 리팩토링
+### 📝 리팩토링 / 최적화
 <div markdown="1">
+
+- 🔗 <a href="https://github.com/yeoyeong/yeoyeong-sns/wiki/%F0%9F%A7%BE-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EB%A6%AC%EC%82%AC%EC%9D%B4%EC%A7%95-:-Sharp-%EB%9D%BC%EC%9D%B4%EB%B8%8C%EB%9F%AC%EB%A6%AC-%EC%82%AC%EC%9A%A9">🧾 이미지 리사이징 : Sharp 라이브러리 사용
+</a>
 
 - 🔗 <a href="https://github.com/yeoyeong/yeoyeong-sns/wiki/%F0%9F%A7%BE-React-Query-%EC%BA%90%EC%8B%B1-%EC%9D%B4%EC%8A%88-%ED%95%B4%EA%B2%B0">🧾 단계별 렌더링 방식 수정
 </a>

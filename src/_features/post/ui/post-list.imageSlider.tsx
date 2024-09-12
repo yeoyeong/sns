@@ -26,7 +26,7 @@ export default function ImageSlider({ slideImages }: Props) {
                 src={slideImage}
                 alt='포스트사진'
                 width={430}
-                height={64}
+                height={256}
               />
             </SwiperSlide>
           ))}
